@@ -1,0 +1,20 @@
+{
+  "name": "due_news",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "get": "flutter pub get",
+    "clean": "flutter clean",
+    "lint": "dart fix --apply",
+    "build": "flutter pub run build_runner build --delete-conflicting-outputs"
+  },
+  "keywords": [],
+  "author": "due",
+  "license": "ISC"
+}
