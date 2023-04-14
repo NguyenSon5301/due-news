@@ -1,0 +1,65 @@
+com.example.due_news.app-webkit-1.6.0-0 C:\Users\ADMIN\.gradle\caches\transforms-3\0039dcf6c39b4496732527ac6187e065\transformed\webkit-1.6.0\res
+com.example.due_news.app-coordinatorlayout-1.1.0-1 C:\Users\ADMIN\.gradle\caches\transforms-3\06fb1a483c7523a90df9ec05c5a8f563\transformed\coordinatorlayout-1.1.0\res
+com.example.due_news.app-jetified-firebase-common-20.3.2-2 C:\Users\ADMIN\.gradle\caches\transforms-3\0717a1b8de7947f722bb5da2d0b0b52e\transformed\jetified-firebase-common-20.3.2\res
+com.example.due_news.app-browser-1.4.0-3 C:\Users\ADMIN\.gradle\caches\transforms-3\0fc32f9f77ac99a5f3fa7d277fb80a5a\transformed\browser-1.4.0\res
+com.example.due_news.app-jetified-ucrop-2.2.8-4 C:\Users\ADMIN\.gradle\caches\transforms-3\105a93f5fcb1df24299cb9ae69a1a455\transformed\jetified-ucrop-2.2.8\res
+com.example.due_news.app-jetified-play-services-basement-18.1.0-5 C:\Users\ADMIN\.gradle\caches\transforms-3\1584d5c98e05ed5e2fa707fa76c9623a\transformed\jetified-play-services-basement-18.1.0\res
+com.example.due_news.app-material-1.4.0-6 C:\Users\ADMIN\.gradle\caches\transforms-3\1c3595bc7e2368b18874c28854f314e8\transformed\material-1.4.0\res
+com.example.due_news.app-jetified-appcompat-resources-1.3.0-7 C:\Users\ADMIN\.gradle\caches\transforms-3\2d03140169a8d68ed4c8e5afa63050e3\transformed\jetified-appcompat-resources-1.3.0\res
+com.example.due_news.app-jetified-core-ktx-1.9.0-8 C:\Users\ADMIN\.gradle\caches\transforms-3\326119c2dcee91a274bb95e6b865cacb\transformed\jetified-core-ktx-1.9.0\res
+com.example.due_news.app-jetified-media2-session-1.2.0-9 C:\Users\ADMIN\.gradle\caches\transforms-3\37dc59033dc008fb3f8f8d8864b2d07a\transformed\jetified-media2-session-1.2.0\res
+com.example.due_news.app-recyclerview-1.1.0-10 C:\Users\ADMIN\.gradle\caches\transforms-3\3913903a32615be90718321d2bf70061\transformed\recyclerview-1.1.0\res
+com.example.due_news.app-jetified-annotation-experimental-1.3.0-11 C:\Users\ADMIN\.gradle\caches\transforms-3\3d49a91fa3ae42e437ca5de324fe996b\transformed\jetified-annotation-experimental-1.3.0\res
+com.example.due_news.app-jetified-window-1.0.0-beta04-12 C:\Users\ADMIN\.gradle\caches\transforms-3\447097570d07a5f02ec606e5ede47f78\transformed\jetified-window-1.0.0-beta04\res
+com.example.due_news.app-media-1.4.1-13 C:\Users\ADMIN\.gradle\caches\transforms-3\53f5ab7a9be403db02c444c86761fc35\transformed\media-1.4.1\res
+com.example.due_news.app-transition-1.4.1-14 C:\Users\ADMIN\.gradle\caches\transforms-3\577b0338832eb5f1b41f252e1191de53\transformed\transition-1.4.1\res
+com.example.due_news.app-jetified-viewpager2-1.0.0-15 C:\Users\ADMIN\.gradle\caches\transforms-3\5ced7162a0f0e92841f0b9baf007040e\transformed\jetified-viewpager2-1.0.0\res
+com.example.due_news.app-cardview-1.0.0-16 C:\Users\ADMIN\.gradle\caches\transforms-3\63c0307e765efd69240392d904fbd7bb\transformed\cardview-1.0.0\res
+com.example.due_news.app-constraintlayout-2.0.1-17 C:\Users\ADMIN\.gradle\caches\transforms-3\69f85d8af548b19bcee9c0a4d9b6597d\transformed\constraintlayout-2.0.1\res
+com.example.due_news.app-core-1.9.0-18 C:\Users\ADMIN\.gradle\caches\transforms-3\6d1ed9ef465aa757766c9d169ef26812\transformed\core-1.9.0\res
+com.example.due_news.app-jetified-startup-runtime-1.0.0-19 C:\Users\ADMIN\.gradle\caches\transforms-3\749b473226ac34c29c5a5401c057f4d6\transformed\jetified-startup-runtime-1.0.0\res
+com.example.due_news.app-jetified-cloudinary-android-core-2.2.0-20 C:\Users\ADMIN\.gradle\caches\transforms-3\77af4208b27f6c119fe39a02feb775a2\transformed\jetified-cloudinary-android-core-2.2.0\res
+com.example.due_news.app-fragment-1.3.4-21 C:\Users\ADMIN\.gradle\caches\transforms-3\7b5a0e863cf3e392e26f7603fdb7d345\transformed\fragment-1.3.4\res
+com.example.due_news.app-jetified-cloudinary-android-ui-2.2.0-22 C:\Users\ADMIN\.gradle\caches\transforms-3\87fe0b7c07672161795a55e797dfcd01\transformed\jetified-cloudinary-android-ui-2.2.0\res
+com.example.due_news.app-jetified-drawee-2.6.0-23 C:\Users\ADMIN\.gradle\caches\transforms-3\8bae0455981813b8ad1015f3d568ba57\transformed\jetified-drawee-2.6.0\res
+com.example.due_news.app-jetified-exoplayer-core-2.18.4-24 C:\Users\ADMIN\.gradle\caches\transforms-3\94ea093edd384df8bcc8ea879109527b\transformed\jetified-exoplayer-core-2.18.4\res
+com.example.due_news.app-lifecycle-livedata-core-2.5.1-25 C:\Users\ADMIN\.gradle\caches\transforms-3\97e34a8a3417953d220f14e243d3c557\transformed\lifecycle-livedata-core-2.5.1\res
+com.example.due_news.app-appcompat-1.3.0-26 C:\Users\ADMIN\.gradle\caches\transforms-3\a23e2d523fdb17a267aa53879114f28e\transformed\appcompat-1.3.0\res
+com.example.due_news.app-lifecycle-runtime-2.5.1-27 C:\Users\ADMIN\.gradle\caches\transforms-3\a742a6f28e453a0bbc053cd8fbbc73c8\transformed\lifecycle-runtime-2.5.1\res
+com.example.due_news.app-jetified-activity-1.6.1-28 C:\Users\ADMIN\.gradle\caches\transforms-3\ac870397dae504720c576f5febb88a83\transformed\jetified-activity-1.6.1\res
+com.example.due_news.app-jetified-media2-common-1.2.0-29 C:\Users\ADMIN\.gradle\caches\transforms-3\ad77463ecc2d1826d907dc2e2e867994\transformed\jetified-media2-common-1.2.0\res
+com.example.due_news.app-jetified-window-java-1.0.0-beta04-30 C:\Users\ADMIN\.gradle\caches\transforms-3\afb24bf3b5fa4d05966eaff354924ffe\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.due_news.app-jetified-cloudinary-android-preprocess-2.2.0-31 C:\Users\ADMIN\.gradle\caches\transforms-3\affe720d870ed6720bec736f869cfaf2\transformed\jetified-cloudinary-android-preprocess-2.2.0\res
+com.example.due_news.app-jetified-lifecycle-viewmodel-savedstate-2.5.1-32 C:\Users\ADMIN\.gradle\caches\transforms-3\b9e4c3b30e6336254e03633133bb373c\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\res
+com.example.due_news.app-lifecycle-viewmodel-2.5.1-33 C:\Users\ADMIN\.gradle\caches\transforms-3\b9fc062493385b1dcc87b52fd875a498\transformed\lifecycle-viewmodel-2.5.1\res
+com.example.due_news.app-jetified-savedstate-1.2.0-34 C:\Users\ADMIN\.gradle\caches\transforms-3\d9bc8965f34900f2b388dffebee5cdbd\transformed\jetified-savedstate-1.2.0\res
+com.example.due_news.app-work-runtime-ktx-2.7.1-35 C:\Users\ADMIN\.gradle\caches\transforms-3\ddf2858d8e3f282070528e9175c813ca\transformed\work-runtime-ktx-2.7.1\res
+com.example.due_news.app-jetified-play-services-base-18.0.1-36 C:\Users\ADMIN\.gradle\caches\transforms-3\e908116f9407043f144c976db1ae802f\transformed\jetified-play-services-base-18.0.1\res
+com.example.due_news.app-work-runtime-2.7.1-37 C:\Users\ADMIN\.gradle\caches\transforms-3\e947ebecfbee16be9dd1faf54f0907c9\transformed\work-runtime-2.7.1\res
+com.example.due_news.app-debug-38 D:\Desktop\DUE NEWS\due_news\android\app\src\debug\res
+com.example.due_news.app-main-39 D:\Desktop\DUE NEWS\due_news\android\app\src\main\res
+com.example.due_news.app-google-services-40 D:\Desktop\DUE NEWS\due_news\build\app\generated\res\google-services\debug
+com.example.due_news.app-pngs-41 D:\Desktop\DUE NEWS\due_news\build\app\generated\res\pngs\debug
+com.example.due_news.app-resValues-42 D:\Desktop\DUE NEWS\due_news\build\app\generated\res\resValues\debug
+com.example.due_news.app-rs-43 D:\Desktop\DUE NEWS\due_news\build\app\generated\res\rs\debug
+com.example.due_news.app-mergeDebugResources-44 D:\Desktop\DUE NEWS\due_news\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.due_news.app-mergeDebugResources-45 D:\Desktop\DUE NEWS\due_news\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.due_news.app-merged_res-46 D:\Desktop\DUE NEWS\due_news\build\app\intermediates\merged_res\debug
+com.example.due_news.app-packaged_res-47 D:\Desktop\DUE NEWS\due_news\build\audio_session\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-48 D:\Desktop\DUE NEWS\due_news\build\cloud_firestore\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-49 D:\Desktop\DUE NEWS\due_news\build\firebase_auth\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-50 D:\Desktop\DUE NEWS\due_news\build\firebase_core\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-51 D:\Desktop\DUE NEWS\due_news\build\firebase_dynamic_links\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-52 D:\Desktop\DUE NEWS\due_news\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-53 D:\Desktop\DUE NEWS\due_news\build\image_cropper\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-54 D:\Desktop\DUE NEWS\due_news\build\image_picker_android\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-55 D:\Desktop\DUE NEWS\due_news\build\just_audio\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-56 D:\Desktop\DUE NEWS\due_news\build\path_provider_android\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-57 D:\Desktop\DUE NEWS\due_news\build\permission_handler_android\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-58 D:\Desktop\DUE NEWS\due_news\build\search_choices\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-59 D:\Desktop\DUE NEWS\due_news\build\share_plus\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-60 D:\Desktop\DUE NEWS\due_news\build\sqflite\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-61 D:\Desktop\DUE NEWS\due_news\build\url_launcher_android\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-62 D:\Desktop\DUE NEWS\due_news\build\video_player_android\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-63 D:\Desktop\DUE NEWS\due_news\build\wakelock\intermediates\packaged_res\debug
+com.example.due_news.app-packaged_res-64 D:\Desktop\DUE NEWS\due_news\build\webview_flutter_android\intermediates\packaged_res\debug

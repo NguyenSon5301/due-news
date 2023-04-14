@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">592498965538-edme6snq048ojlfnma85sl5jhosoe6cg.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">592498965538</string>
+    <string name="google_api_key" translatable="false">AIzaSyBYBK7PiubmxqtpB_mnyg4EsbKudk_ye44</string>
+    <string name="google_app_id" translatable="false">1:592498965538:android:ac005e422f29dccab95e7b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBYBK7PiubmxqtpB_mnyg4EsbKudk_ye44</string>
+    <string name="google_storage_bucket" translatable="false">due-news.appspot.com</string>
+    <string name="project_id" translatable="false">due-news</string>
+</resources>
