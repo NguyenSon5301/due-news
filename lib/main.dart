@@ -1,15 +1,12 @@
-import 'dart:collection';
-
-import 'package:due_news/services/link_services.dart';
-import 'package:due_news/services/route_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'common/common.dart';
-import 'features/home/home_page.dart';
 import 'models/firebaseuser.dart';
 import 'services/auth_services.dart';
+import 'services/link_services.dart';
+import 'services/route_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
