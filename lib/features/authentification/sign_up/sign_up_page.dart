@@ -47,10 +47,10 @@ class _Register extends State<Register> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Email",
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Email',
         hintStyle: const TextStyle(color: AppColors.blueLight),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
     final idStudentField = TextFormField(
@@ -63,10 +63,10 @@ class _Register extends State<Register> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: 'Mã số sinh viên',
         hintStyle: const TextStyle(color: AppColors.blueLight),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
 
@@ -85,8 +85,8 @@ class _Register extends State<Register> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Password",
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Password',
         hintStyle: const TextStyle(color: AppColors.blueLight),
         suffixIcon: IconButton(
           icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
@@ -96,7 +96,7 @@ class _Register extends State<Register> {
             });
           },
         ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
 
@@ -118,8 +118,8 @@ class _Register extends State<Register> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Nhập lại Password",
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Nhập lại Password',
         hintStyle: const TextStyle(color: AppColors.blueLight),
         suffixIcon: IconButton(
           icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
@@ -129,7 +129,7 @@ class _Register extends State<Register> {
             });
           },
         ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
 
@@ -197,7 +197,7 @@ class _Register extends State<Register> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -220,7 +220,7 @@ class _Register extends State<Register> {
                               child: const Icon(
                                 Icons.arrow_back_ios,
                                 color: AppColors.blue,
-                                size: 30.0,
+                                size: 30,
                               ),
                             ),
                             const SizedBox(

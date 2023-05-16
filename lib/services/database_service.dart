@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/extracurricular.dart';
-import '../models/news.dart';
 import '../models/semester.dart';
 import '../models/user_information.dart';
 

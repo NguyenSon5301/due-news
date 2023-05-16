@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../common/common.dart';
-import '../../../common/constants/dynamic_link_constant.dart';
-import '../../../gen/assets.gen.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../common/common.dart';
+import '../../../common/constants/constant.dart';
+import '../../../common/gen/assets.gen.dart';
 import '../../../models/firebaseuser.dart';
 import '../../../services/database_service.dart';
 import '../../../services/link_services.dart';
@@ -109,7 +108,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                         Text(
                           widget.title,
                           style: SafeGoogleFont(
-                            'Mulish',
+                            StringManager.mulish,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             height: 1.3,
@@ -119,7 +118,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                         Text(
                           widget.time,
                           style: SafeGoogleFont(
-                            'Mulish',
+                            StringManager.mulish,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             height: 1.4,
@@ -176,14 +175,14 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                                   if (index > -1) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content: Text('Bài báo đã được xóa'),
+                                        content:
+                                            Text(StringManager.removeSaveNews),
                                       ),
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content:
-                                            Text('Bài báo đã được lưu lại'),
+                                        content: Text(StringManager.saveNews),
                                       ),
                                     );
                                   }

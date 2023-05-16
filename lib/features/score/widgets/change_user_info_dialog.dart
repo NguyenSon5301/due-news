@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../common/common.dart';
+import '../../../common/constants/constant.dart';
 
 class ChangeUserInfoDialog extends StatefulWidget {
   final String dataInit;
@@ -64,7 +65,7 @@ class _ChangeUserInfoDialogState extends State<ChangeUserInfoDialog> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   title: const Text(
-                    'Không',
+                    StringManager.no,
                   ),
                   onTap: () {
                     Navigator.of(context).pop();
@@ -75,7 +76,7 @@ class _ChangeUserInfoDialogState extends State<ChangeUserInfoDialog> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   title: const Text(
-                    'Xác nhận',
+                    StringManager.confirm,
                   ),
                   onTap: () {
                     Navigator.of(context).pop(textController.text);

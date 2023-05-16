@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/common.dart';
+import '../../common/constants/constant.dart';
 import '../../models/extracurricular.dart';
 import '../../models/subject.dart';
 import '../../models/user_information.dart';
@@ -30,7 +31,7 @@ class _ScorePageState extends State<ScorePage>
   }
 
   DatabaseService db = DatabaseService();
-  List<String> items = ['Chọn học kỳ'];
+  List<String> items = [StringManager.selectSemester];
 
   void _loadInitSemester() {
     db.getSemesterList().then(
@@ -42,7 +43,7 @@ class _ScorePageState extends State<ScorePage>
         );
   }
 
-  String semester = 'Chọn học kỳ';
+  String semester = StringManager.selectSemester;
   bool? value;
   String? selectedValue;
 
@@ -149,7 +150,7 @@ class _ScorePageState extends State<ScorePage>
           'KẾT QUẢ HỌC TẬP TOÀN KHÓA',
           textAlign: TextAlign.center,
           style: SafeGoogleFont(
-            'Mulish',
+            StringManager.mulish,
             fontSize: 18,
             fontWeight: FontWeight.w700,
             height: 1.2,
@@ -159,7 +160,7 @@ class _ScorePageState extends State<ScorePage>
         Text(
           '(Ngành đào tạo chương trình chính - Chỉ mang tính tham khảo)',
           style: SafeGoogleFont(
-            'Mulish',
+            StringManager.mulish,
             fontSize: 8,
             fontWeight: FontWeight.w400,
             height: 1.4,
@@ -191,17 +192,22 @@ class _ScorePageState extends State<ScorePage>
           final dateOnly = DateFormat('dd/MM/yyyy').format(data.birthDate!);
           return Column(
             children: [
-              _detailInfor('Họ và tên', data.name, 'name', data),
+              _detailInfor(StringManager.nameStudent, data.name, 'name', data),
               _sizedBox(10),
-              _detailInfor('Ngày sinh', dateOnly, 'birthDate', data),
+              _detailInfor(
+                  StringManager.birthDateStudent, dateOnly, 'birthDate', data),
               _sizedBox(10),
-              _detailInfor('Lớp', data.classRoom, 'class', data),
+              _detailInfor(
+                  StringManager.classStudent, data.classRoom, 'class', data),
               _sizedBox(10),
-              _detailInfor('Hệ', data.level, 'level', data),
+              _detailInfor(
+                  StringManager.levelStudent, data.level, 'level', data),
               _sizedBox(10),
-              _detailInfor('Ngành', data.field, 'field', data),
+              _detailInfor(
+                  StringManager.fieldStudent, data.field, 'field', data),
               _sizedBox(10),
-              _detailInfor('Chuyên ngành', data.major, 'major', data)
+              _detailInfor(
+                  StringManager.majorStudent, data.major, 'major', data)
             ],
           );
         } else {
@@ -227,7 +233,7 @@ class _ScorePageState extends State<ScorePage>
             child: Text(
               title,
               style: SafeGoogleFont(
-                'Mulish',
+                StringManager.mulish,
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 height: 1.4,
@@ -248,7 +254,7 @@ class _ScorePageState extends State<ScorePage>
                   child: Text(
                     ':  $data',
                     style: SafeGoogleFont(
-                      'Mulish',
+                      StringManager.mulish,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       height: 1.4,
@@ -291,21 +297,21 @@ class _ScorePageState extends State<ScorePage>
           DropdownMenuItem(
             value: null,
             child: Text(
-              'Chọn kiểu tra cứu',
+              StringManager.selectSearchType,
               style: TextStyle(color: AppColors.redColor),
             ),
           ),
           const DropdownMenuItem(
             value: true,
             child: Text(
-              'Điểm học phần',
+              StringManager.scoreSuject,
               style: TextStyle(color: AppColors.blueLight),
             ),
           ),
           const DropdownMenuItem(
             value: false,
             child: Text(
-              'Điểm ngoại khóa',
+              StringManager.scoreExtracuricularActivity,
               style: TextStyle(color: AppColors.blueLight),
             ),
           ),
@@ -325,9 +331,9 @@ class _ScorePageState extends State<ScorePage>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Chọn học kỳ',
+                    StringManager.selectSemester,
                     style: SafeGoogleFont(
-                      'Mulish',
+                      StringManager.mulish,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       height: 1.4,
@@ -339,7 +345,7 @@ class _ScorePageState extends State<ScorePage>
                   Text(
                     ':',
                     style: SafeGoogleFont(
-                      'Mulish',
+                      StringManager.mulish,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       height: 1.4,
@@ -432,7 +438,7 @@ class _ScorePageState extends State<ScorePage>
                 child: Text(
                   semester,
                   style: SafeGoogleFont(
-                    'Mulish',
+                    StringManager.mulish,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     height: 1.4,
@@ -546,7 +552,7 @@ class _ScorePageState extends State<ScorePage>
                               child: Text(
                                 'Số tín chỉ tích lũy',
                                 style: SafeGoogleFont(
-                                  'Mulish',
+                                  StringManager.mulish,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                   height: 1.4,
@@ -561,7 +567,7 @@ class _ScorePageState extends State<ScorePage>
                               child: Text(
                                 _totalCredit(data).toString(),
                                 style: SafeGoogleFont(
-                                  'Mulish',
+                                  StringManager.mulish,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                   height: 1.4,
@@ -576,7 +582,7 @@ class _ScorePageState extends State<ScorePage>
                               child: Text(
                                 'Điểm TB Học kỳ',
                                 style: SafeGoogleFont(
-                                  'Mulish',
+                                  StringManager.mulish,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                   height: 1.4,
@@ -591,7 +597,7 @@ class _ScorePageState extends State<ScorePage>
                               child: Text(
                                 _averageSemesterScores(data).toString(),
                                 style: SafeGoogleFont(
-                                  'Mulish',
+                                  StringManager.mulish,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                   height: 1.4,
@@ -644,11 +650,11 @@ class _ScorePageState extends State<ScorePage>
               children: [
                 TableRow(
                   children: [
-                    _titleTable('STT'),
-                    _titleTable('Học kỳ'),
-                    _titleTable('Tên hoạt động'),
-                    _titleTable('Danh mục chính	'),
-                    _titleTable('Điểm hoạt động'),
+                    _titleTable(StringManager.ordinalNumberTable),
+                    _titleTable(StringManager.semesterTable),
+                    _titleTable(StringManager.nameActivityTable),
+                    _titleTable(StringManager.menuActivityTable),
+                    _titleTable(StringManager.scoreActivityTable),
                   ],
                 ),
               ],
@@ -728,7 +734,7 @@ class _ScorePageState extends State<ScorePage>
                                   _showDialog(context);
                                 },
                               ),
-                              _titleTable('Tổng cộng'),
+                              _titleTable(StringManager.totalScore),
                               _titleTable(''),
                               _titleTable(
                                 _totalExtracurricularScores(data).toString(),
@@ -833,7 +839,7 @@ class _ScorePageState extends State<ScorePage>
           alignment: Alignment.center,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Điểm số'),
+              title: const Text(StringManager.titleScorePage),
             ),
             body: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -873,13 +879,14 @@ class _ScorePageState extends State<ScorePage>
                                 children: [
                                   TableRow(
                                     children: [
-                                      _titleTable('STT'),
-                                      _titleTable('Học kỳ'),
-                                      _titleTable('Học phần'),
-                                      _titleTable('Điểm thành phần 1'),
-                                      _titleTable('Điểm thành phần 2'),
-                                      _titleTable('Điểm thành phần 3'),
-                                      _titleTable('Điểm trung bình'),
+                                      _titleTable(
+                                          StringManager.ordinalNumberTable),
+                                      _titleTable(StringManager.semesterTable),
+                                      _titleTable(StringManager.subject),
+                                      _titleTable(StringManager.scorePart1),
+                                      _titleTable(StringManager.scorePart2),
+                                      _titleTable(StringManager.scorePart3),
+                                      _titleTable(StringManager.averageScore),
                                     ],
                                   ),
                                 ],
@@ -1012,12 +1019,12 @@ class _ScorePageState extends State<ScorePage>
                           children: [
                             TableRow(
                               children: [
-                                _titleTable('STT'),
-                                _titleTable('Học kỳ'),
-                                _titleTable('Điểm thành phần 1'),
-                                _titleTable('Điểm thành phần 2'),
-                                _titleTable('Điểm thành phần 3'),
-                                _titleTable('Điểm trung bình'),
+                                _titleTable(StringManager.ordinalNumberTable),
+                                _titleTable(StringManager.semesterTable),
+                                _titleTable(StringManager.scorePart1),
+                                _titleTable(StringManager.scorePart2),
+                                _titleTable(StringManager.scorePart3),
+                                _titleTable(StringManager.averageScore),
                               ],
                             ),
                           ],

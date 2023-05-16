@@ -1,17 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../../common/colors/app_color.dart';
 
 class RoundIconButtonWidget extends StatelessWidget {
   const RoundIconButtonWidget({
-    super.key,
+    required this.borderColor,
+    required this.iconName,
     required this.iconColor,
     required this.iconWidth,
     required this.iconHeight,
-    required this.borderColor,
     this.onTap,
-    required this.iconName,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final Color borderColor;
   final String iconName;
@@ -27,12 +28,13 @@ class RoundIconButtonWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColors.borderColor,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+          border: Border.all(
+            color: AppColors.borderColor,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Image.asset(
             iconName,
             width: iconWidth,

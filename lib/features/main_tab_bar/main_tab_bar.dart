@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../gen/assets.gen.dart';
+import '../../common/gen/assets.gen.dart';
 import '../../common/colors/app_color.dart';
+import '../../common/constants/constant.dart';
 import '../../models/firebaseuser.dart';
 import '../../services/database_service.dart';
 import '../admin/add_extracurricular/add_extracurricular_page.dart';
@@ -30,7 +31,7 @@ class _MainTabBarState extends State<MainTabBar> {
     const NewsCollectionPage(),
     const AddExtracurricularPage(),
     SamplePage(
-      title: 'Trang thông tin',
+      title: StringManager.titleInformationPage,
     ),
   ];
 
@@ -62,7 +63,7 @@ class _MainTabBarState extends State<MainTabBar> {
             children: [
               BottomIconWidget(
                 isSelect: pageIndex == 0,
-                title: 'Tin tức',
+                title: StringManager.titleNewsPage,
                 iconName: pageIndex == 0
                     ? Assets.icons.icSelectedHome.path
                     : Assets.icons.icUnselectedHome.path,
@@ -87,7 +88,7 @@ class _MainTabBarState extends State<MainTabBar> {
                           if (DocData['role'].contains('user')) ...[
                             BottomIconWidget(
                               isSelect: pageIndex == 1,
-                              title: 'Điểm số',
+                              title: StringManager.titleScorePage,
                               iconName: pageIndex == 1
                                   ? Assets.icons.icSelectedSearchNormal.path
                                   : Assets.icons.icUnselectedSearchNormal.path,
@@ -102,7 +103,7 @@ class _MainTabBarState extends State<MainTabBar> {
                             ),
                             BottomIconWidget(
                               isSelect: pageIndex == 2,
-                              title: 'Lưu trữ',
+                              title: StringManager.titleSaveButton,
                               iconName: pageIndex == 2
                                   ? Assets.icons.icSelectedArchive.path
                                   : Assets.icons.icUnselectedArchive.path,
@@ -119,7 +120,7 @@ class _MainTabBarState extends State<MainTabBar> {
                           if (DocData['role'].contains('admin')) ...[
                             BottomIconWidget(
                               isSelect: pageIndex == 3,
-                              title: 'Lưu trữ',
+                              title: StringManager.titleSavePage,
                               iconName: pageIndex == 3
                                   ? Assets.icons.icSelectedArchive.path
                                   : Assets.icons.icUnselectedArchive.path,
@@ -143,7 +144,8 @@ class _MainTabBarState extends State<MainTabBar> {
               ],
               BottomIconWidget(
                 isSelect: pageIndex == 4,
-                title: user != null ? 'Đăng xuất' : 'Đăng nhập',
+                title:
+                    user != null ? StringManager.logout : StringManager.login,
                 iconName: pageIndex == 4
                     ? Assets.icons.icSelectedUser.path
                     : Assets.icons.icUnselectedUser.path,

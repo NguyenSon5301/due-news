@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/colors/app_color.dart';
+import '../../../common/constants/constant.dart';
 import '../../../common/singleton/category_news_singleton.dart';
 import '../../utils/utils.dart';
 
@@ -56,7 +57,7 @@ class _HorizontalCategoryListState extends State<HorizontalCategoryList> {
                     widget.items[index],
                     textAlign: TextAlign.center,
                     style: SafeGoogleFont(
-                      'Mulish',
+                      StringManager.mulish,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       height: 1.3,

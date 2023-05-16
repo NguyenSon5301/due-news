@@ -6,6 +6,7 @@ import 'package:number_paginator/number_paginator.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../common/common.dart';
+import '../../common/constants/constant.dart';
 import '../../common/singleton/category_news_singleton.dart';
 import '../../models/data.dart';
 import '../../models/news.dart';
@@ -81,10 +82,10 @@ class _HomePageState extends State<HomePage>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'THÔNG BÁO',
+                      StringManager.homeCaption,
                       textAlign: TextAlign.start,
                       style: SafeGoogleFont(
-                        'Mulish',
+                        StringManager.mulish,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                         height: 1.2,
