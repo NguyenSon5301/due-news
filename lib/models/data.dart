@@ -1,4 +1,4 @@
-import '../gen/assets.gen.dart';
+import '../common/gen/assets.gen.dart';
 
 const List<String> myCategory = [
   'Tất cả',

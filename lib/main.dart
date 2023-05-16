@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'common/common.dart';
-import 'features/home/home_page.dart';
 import 'models/firebaseuser.dart';
 import 'services/auth_services.dart';
 
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'DUE News',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

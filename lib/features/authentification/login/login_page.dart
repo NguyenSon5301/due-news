@@ -43,10 +43,10 @@ class _Login extends State<Login> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Email",
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Email',
         hintStyle: const TextStyle(color: AppColors.blueLight),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
 
@@ -65,8 +65,8 @@ class _Login extends State<Login> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Password",
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Password',
         hintStyle: const TextStyle(color: AppColors.blueLight),
         suffixIcon: IconButton(
           icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
@@ -77,7 +77,7 @@ class _Login extends State<Login> {
           },
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(32),
         ),
       ),
     );
@@ -89,7 +89,7 @@ class _Login extends State<Login> {
           MaterialPageRoute(builder: (context) => const Register()),
         );
       },
-      child: const Text('New? Register here'),
+      child: const Text('Đăng ký tại đây'),
     );
 
     final loginEmailPasswordButon = CustomButton(
@@ -129,7 +129,7 @@ class _Login extends State<Login> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -152,7 +152,7 @@ class _Login extends State<Login> {
                             child: const Icon(
                               Icons.arrow_back_ios,
                               color: AppColors.blue,
-                              size: 30.0,
+                              size: 30,
                             ),
                           ),
                         ],

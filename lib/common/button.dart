@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {required this.onPressed,
-      required this.buttonLabel,
-      required this.color});
+  const CustomButton({
+    required this.onPressed,
+    required this.buttonLabel,
+    required this.color,
+    super.key,
+  });
 
   final Function()? onPressed;
   final String buttonLabel;
@@ -12,18 +14,18 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Material(
-        elevation: 5.0,
+        elevation: 5,
         color: color,
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(30),
         child: MaterialButton(
           onPressed: onPressed,
-          minWidth: 200.0,
-          height: 42.0,
+          minWidth: 200,
+          height: 42,
           child: Text(
             buttonLabel,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),
@@ -33,20 +35,20 @@ class CustomButton extends StatelessWidget {
 
 /// This are styles used in our textfield
 /// optional:create a class to hold your styles
-//import material design 
+//import material design
 /// to use it in a widget just call the name of the eg: decoration: kTextFieldDecoration
 const kTextFieldDecoration = InputDecoration(
   hintText: 'Enter password',
-  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    borderRadius: BorderRadius.all(Radius.circular(32)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    borderSide: BorderSide(color: Colors.blueAccent, width: 1),
+    borderRadius: BorderRadius.all(Radius.circular(32)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+    borderRadius: BorderRadius.all(Radius.circular(32)),
   ),
 );

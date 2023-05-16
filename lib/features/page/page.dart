@@ -10,6 +10,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 
 import '../../common/common.dart';
+import '../../common/constants/constant.dart';
 import '../../models/firebaseuser.dart';
 import '../../services/auth_services.dart';
 import '../authentification/login/login_page.dart';
@@ -57,7 +58,7 @@ class _SamplePageState extends State<SamplePage> {
                 Text(
                   widget.title,
                   style: SafeGoogleFont(
-                    'Mulish',
+                    StringManager.mulish,
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     height: 1.2575,
@@ -65,7 +66,8 @@ class _SamplePageState extends State<SamplePage> {
                     color: Color(0xff1e2022),
                   ),
                 ),
-                if (widget.title.contains('Trang thông tin')) ...[
+                if (widget.title
+                    .contains(StringManager.titleInformationPage)) ...[
                   if (user != null) ...[
                     if (userAuth != null)
                       //   TextFormField(
@@ -305,7 +307,7 @@ class _SamplePageState extends State<SamplePage> {
                             ),
                           );
                         },
-                        buttonLabel: 'Đăng xuất',
+                        buttonLabel: StringManager.logout,
                         color: AppColors.red,
                       )
                   ] else
@@ -318,7 +320,7 @@ class _SamplePageState extends State<SamplePage> {
                           ),
                         );
                       },
-                      buttonLabel: 'Đăng nhập',
+                      buttonLabel: StringManager.login,
                       color: AppColors.red,
                     )
                 ]
@@ -455,7 +457,7 @@ class _SamplePageState extends State<SamplePage> {
 //                 Text(
 //                   widget.title,
 //                   style: SafeGoogleFont(
-//                     'Mulish',
+//                    StringManager.mulish,
 //                     fontSize: 17,
 //                     fontWeight: FontWeight.w600,
 //                     height: 1.2575,
@@ -463,7 +465,7 @@ class _SamplePageState extends State<SamplePage> {
 //                     color: Color(0xff1e2022),
 //                   ),
 //                 ),
-//                 if (widget.title.contains('Trang thông tin')) ...[
+//                 if (widget.title.contains(StringManager.titleInformationPage)) ...[
 //                   if (user != null) ...[
 //                     if (userAuth != null)
 //                       TextFormField(

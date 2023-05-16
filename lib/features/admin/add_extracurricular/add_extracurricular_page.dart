@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 
 import '../../../common/common.dart';
+import '../../../common/constants/constant.dart';
 import '../../../models/extracurricular.dart';
 import '../../../services/database_service.dart';
 import '../../utils/utils.dart';
@@ -27,8 +28,8 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
   final TextEditingController _scoreField = TextEditingController();
   final TextEditingController _idStudentField = TextEditingController();
 
-  String selectedSemester = 'Chọn học kỳ';
-  String selectedActivity = 'Chọn tên hoạt động';
+  String selectedSemester = StringManager.selectSemester;
+  String selectedActivity = StringManager.selectNameActivity;
   @override
   bool get wantKeepAlive => true;
   @override
@@ -38,8 +39,8 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
     _loadInitActivity();
   }
 
-  List<String> items = ['Chọn học kỳ'];
-  String kCities = 'Chọn học kỳ';
+  List<String> items = [StringManager.selectSemester];
+  String kCities = StringManager.selectSemester;
 
   void _loadInitSemester() {
     db.getSemesterList().then(
@@ -130,10 +131,10 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'NHẬP THÔNG TIN ĐIỂM HOẠT ĐỘNG NGOẠI KHÓA',
+          StringManager.captionAdmin,
           textAlign: TextAlign.center,
           style: SafeGoogleFont(
-            'Mulish',
+            StringManager.mulish,
             fontSize: 18,
             fontWeight: FontWeight.w700,
             height: 1.2,
@@ -149,15 +150,15 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       children: [
         const SizedBox(
           width: 120,
-          child: Text('Học kỳ:'),
+          child: Text(StringManager.semesterAdmin),
         ),
         SizedBox(
           width: 200,
           child: SearchChoices.single(
             items: listSemester,
             value: selectedSemester,
-            hint: "Chọn học kỳ",
-            searchHint: "Chọn học kỳ",
+            hint: StringManager.selectSemester,
+            searchHint: StringManager.selectSemester,
             onChanged: (value) {
               setState(() {
                 selectedSemester = value;
@@ -173,14 +174,14 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
   Widget _nameActivityRow() {
     return Row(
       children: [
-        const Text('Tên hoạt động:'),
+        const Text(StringManager.nameActivityAdmin),
         SizedBox(
           width: 200,
           child: SearchChoices.single(
             items: listNameActivity,
             value: selectedActivity,
-            hint: "Chọn tên hoạt động",
-            searchHint: "Chọn tên hoạt động",
+            hint: StringManager.selectNameActivity,
+            searchHint: StringManager.selectNameActivity,
             onChanged: (value) {
               setState(() {
                 selectedActivity = value;
@@ -198,14 +199,14 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       children: [
         const SizedBox(
           width: 120,
-          child: Text('Điểm:'),
+          child: Text(StringManager.scoreAdmin),
         ),
         SizedBox(
           width: 200,
           child: TextFormField(
             controller: _scoreField,
             decoration: const InputDecoration(
-              labelText: 'Nhập điểm',
+              labelText: StringManager.typeScoreAdmin,
               border: OutlineInputBorder(),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red, width: 5),
@@ -222,14 +223,14 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       children: [
         const SizedBox(
           width: 120,
-          child: Text('ID sinh viên:'),
+          child: Text(StringManager.idStudentAdmin),
         ),
         SizedBox(
           width: 200,
           child: TextFormField(
             controller: _idStudentField,
             decoration: const InputDecoration(
-              labelText: 'Nhập ID',
+              labelText: StringManager.typeIDStudent,
               border: OutlineInputBorder(),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red, width: 5),
@@ -250,30 +251,30 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
   }
 
   Future<void> _saveData() async {
-    if (selectedSemester.contains('Chọn học kỳ')) {
-      _snackBar('Vui lòng chọn học kỳ !!!');
+    if (selectedSemester.contains(StringManager.selectSemester)) {
+      _snackBar(StringManager.reportAdmin1);
       return;
     }
-    if (selectedActivity.contains('Chọn tên hoạt động')) {
-      _snackBar('Vui lòng chọn tên hoạt động !!!');
+    if (selectedActivity.contains(StringManager.selectNameActivity)) {
+      _snackBar(StringManager.reportAdmin2);
       return;
     }
     if (_scoreField.text.isEmpty) {
-      _snackBar('Vui lòng điền điểm !!!');
+      _snackBar(StringManager.reportAdmin3);
       return;
     }
     final check = isNumeric(_scoreField.text);
     if (!isNumeric(_scoreField.text)) {
-      _snackBar('Vui lòng điền điểm dạng số !!!');
+      _snackBar(StringManager.reportAdmin4);
       return;
     }
     if (_idStudentField.text.isEmpty) {
-      _snackBar('Vui lòng điền ID học viên !!!');
+      _snackBar(StringManager.reportAdmin5);
       return;
     }
     await db.getUserList(_idStudentField.text).then((value) async {
       if (value.isEmpty) {
-        _snackBar('Không tìm thấy học viên !!!');
+        _snackBar(StringManager.reportAdmin6);
         return;
       }
       var index = -1;
@@ -283,7 +284,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
         }
       }
       if (index == -1) {
-        _snackBar('Không tìm thấy tên hoạt động !!!');
+        _snackBar(StringManager.reportAdmin7);
         return;
       }
       var documentReference = FirebaseFirestore.instance
@@ -299,7 +300,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       await documentReference.add(add).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Điểm ngoại khóa đã được thêm'),
+            content: Text(StringManager.reportAdmin7),
           ),
         );
       });
