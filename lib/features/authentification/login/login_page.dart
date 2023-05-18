@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../common/background.dart';
 import '../../../common/button.dart';
 import '../../../common/colors/app_color.dart';
+import '../../../common/constants/constant.dart';
 import '../../../models/loginuser.dart';
 import '../../../services/auth_services.dart';
 import '../../main_tab_bar/main_tab_bar.dart';
@@ -34,17 +35,11 @@ class _Login extends State<Login> {
       controller: _email,
       autofocus: false,
       validator: (value) {
-        if (value != null) {
-          if (value.contains('@') && value.endsWith('.com')) {
-            return null;
-          }
-          return 'Enter a Valid Email Address';
-        }
         return null;
       },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: 'Email',
+        hintText: StringManager.idStudent,
         hintStyle: const TextStyle(color: AppColors.blueLight),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
       ),
@@ -56,17 +51,17 @@ class _Login extends State<Login> {
       autofocus: false,
       validator: (value) {
         if (value == null || value.trim().isEmpty) {
-          return 'This field is required';
+          return StringManager.requiredTyping;
         }
         if (value.trim().length < 8) {
-          return 'Password must be at least 8 characters in length';
+          return StringManager.atLeastPassword;
         }
         // Return null if the entered password is valid
         return null;
       },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: 'Password',
+        hintText: StringManager.password,
         hintStyle: const TextStyle(color: AppColors.blueLight),
         suffixIcon: IconButton(
           icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
@@ -93,39 +88,43 @@ class _Login extends State<Login> {
     );
 
     final loginEmailPasswordButon = CustomButton(
-        buttonLabel: 'Log in',
+        buttonLabel: StringManager.login,
         color: AppColors.blueLight,
         onPressed: () async {
-          QuerySnapshot snap = await FirebaseFirestore.instance
-              .collection('User')
-              .where('idStudent', isEqualTo: _email.text)
-              .get();
-          dynamic result = await _auth.signInEmailPassword(
-            LoginUser(email: snap.docs[0]['email'], password: _password.text),
-          );
-          if (result.uid == null) {
-            await showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text(result.code),
-                );
-              },
+          if (_formKey.currentState!.validate()) {
+            QuerySnapshot snap = await FirebaseFirestore.instance
+                .collection('User')
+                .where('idStudent', isEqualTo: _email.text)
+                .get();
+            dynamic result = await _auth.signInEmailPassword(
+              LoginUser(email: snap.docs[0]['email'], password: _password.text),
             );
-            return;
+            if (result.uid == null) {
+              await showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text(result.code),
+                  );
+                },
+              );
+              return;
+            }
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MainTabBar(),
+              ),
+            );
           }
-          await Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MainTabBar(),
-            ),
-          );
         });
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Background(
         child: SingleChildScrollView(
+            child: Form(
+          key: _formKey,
           child: Column(
             children: [
               Padding(
@@ -163,7 +162,7 @@ class _Login extends State<Login> {
                       width: 400,
                     ),
                     const Text(
-                      'Log In Page',
+                      StringManager.login,
                       style: TextStyle(
                         fontStyle: FontStyle.normal,
                         fontSize: 40,
@@ -174,7 +173,7 @@ class _Login extends State<Login> {
                     emailField,
                     _buildHeight(30),
                     passwordField,
-                    txtbutton,
+                    // txtbutton,
                     _buildHeight(30),
                     loginEmailPasswordButon,
                     _buildHeight(300),
@@ -183,7 +182,7 @@ class _Login extends State<Login> {
               ),
             ],
           ),
-        ),
+        )),
       ),
     );
   }

@@ -129,7 +129,7 @@ class _ScorePageState extends State<ScorePage>
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: _tableExtracurricular(),
-                  )
+                  ),
                 ]
               ]
             ],
@@ -195,19 +195,39 @@ class _ScorePageState extends State<ScorePage>
               _detailInfor(StringManager.nameStudent, data.name, 'name', data),
               _sizedBox(10),
               _detailInfor(
-                  StringManager.birthDateStudent, dateOnly, 'birthDate', data),
+                StringManager.birthDateStudent,
+                dateOnly,
+                'birthDate',
+                data,
+              ),
               _sizedBox(10),
               _detailInfor(
-                  StringManager.classStudent, data.classRoom, 'class', data),
+                StringManager.classStudent,
+                data.classRoom,
+                'class',
+                data,
+              ),
               _sizedBox(10),
               _detailInfor(
-                  StringManager.levelStudent, data.level, 'level', data),
+                StringManager.levelStudent,
+                data.level,
+                'level',
+                data,
+              ),
               _sizedBox(10),
               _detailInfor(
-                  StringManager.fieldStudent, data.field, 'field', data),
+                StringManager.fieldStudent,
+                data.field,
+                'field',
+                data,
+              ),
               _sizedBox(10),
               _detailInfor(
-                  StringManager.majorStudent, data.major, 'major', data)
+                StringManager.majorStudent,
+                data.major,
+                'major',
+                data,
+              )
             ],
           );
         } else {
@@ -666,7 +686,8 @@ class _ScorePageState extends State<ScorePage>
               if (snapshot.hasData) {
                 List<Extracurricular> data = snapshot.data.docs
                     .map<Extracurricular>(
-                        (doc) => Extracurricular.fromJson(doc.data()))
+                      (doc) => Extracurricular.fromJson(doc.data()),
+                    )
                     .toList();
                 return Column(
                   children: [
@@ -744,6 +765,30 @@ class _ScorePageState extends State<ScorePage>
                         ],
                       ),
                     ),
+                    _sizedBox(30),
+                    RichText(
+                      text: TextSpan(
+                        text: StringManager.classScoreExtracuricularActivity,
+                        style: DefaultTextStyle.of(context).style.copyWith(
+                              fontSize: 20,
+                              color: AppColors.blueLight,
+                            ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: _classExtracurricularActivity(
+                              _totalExtracurricularScores(data),
+                            ),
+                            style: TextStyle(
+                              color: _totalExtracurricularScores(data) > 50
+                                  ? AppColors.green
+                                  : AppColors.redColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 );
               } else {
@@ -793,12 +838,45 @@ class _ScorePageState extends State<ScorePage>
     return total;
   }
 
-  int _totalExtracurricularScores(List<Extracurricular> credits) {
+  int _totalExtracurricularScores(List<Extracurricular> scores) {
     var total = 0;
-    for (var i = 0; i < credits.length; i++) {
-      total += credits[i].score;
+    var totalCategory1 = 0;
+    var totalCategory2 = 0;
+    var totalCategory3 = 0;
+
+    for (var i = 0; i < scores.length; i++) {
+      if (scores[i].categoryScore == 1) {
+        totalCategory1 += scores[i].score;
+      } else if (scores[i].categoryScore == 2) {
+        totalCategory2 += scores[i].score;
+      } else if (scores[i].categoryScore == 3) {
+        totalCategory3 += scores[i].score;
+      }
     }
-    return total;
+    if (totalCategory1 > 25) {
+      totalCategory1 = 25;
+    }
+    if (totalCategory2 > 40) {
+      totalCategory2 = 40;
+    }
+    if (totalCategory3 > 40) {
+      totalCategory3 = 25;
+    }
+    return totalCategory1 + totalCategory2 + totalCategory3;
+  }
+
+  String _classExtracurricularActivity(int score) {
+    if (score >= 90) {
+      return 'Xuất sắc';
+    } else if (score >= 80) {
+      return 'Tốt';
+    } else if (score >= 65) {
+      return 'Khá';
+    } else if (score >= 50) {
+      return 'Đạt';
+    } else {
+      return 'Chưa đạt';
+    }
   }
 
   double _averageSemesterScores(List<Subject> scores) {
@@ -880,7 +958,8 @@ class _ScorePageState extends State<ScorePage>
                                   TableRow(
                                     children: [
                                       _titleTable(
-                                          StringManager.ordinalNumberTable),
+                                        StringManager.ordinalNumberTable,
+                                      ),
                                       _titleTable(StringManager.semesterTable),
                                       _titleTable(StringManager.subject),
                                       _titleTable(StringManager.scorePart1),

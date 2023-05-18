@@ -44,9 +44,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
         image: DecorationImage(
           opacity: 0.5,
           fit: BoxFit.cover,
-          image: NetworkImage(
-            'https://res.cloudinary.com/dbprtaixx/image/upload/v1679071481/10947451_882935715096795_3355128569306577293_o_cyz5gb.jpg',
-          ),
+          image: AssetImage('assets/images/rectangle-6537-bg.png'),
         ),
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(20),
@@ -54,7 +52,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24.0, 45, 24, 0),
+        padding: const EdgeInsets.fromLTRB(24, 45, 24, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -93,9 +91,6 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                 ),
               ],
             ),
-            const CustomHeightSpacer(
-              size: 0.2,
-            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
@@ -112,7 +107,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             height: 1.3,
-                            color: AppColors.black,
+                            color: AppColors.white,
                           ),
                         ),
                         Text(
@@ -122,7 +117,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             height: 1.4,
-                            color: AppColors.black,
+                            color: AppColors.lightGray,
                           ),
                         ),
                       ],
