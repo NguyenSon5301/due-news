@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage>
       ..stream.listen((event) {
         setState(() {
           categoryStr = event;
+          currentPage = 0;
         });
       });
     LinkService.ins.initDynamicLinks();
@@ -164,6 +165,7 @@ class _HomePageState extends State<HomePage>
                           ],
                           if (data.length != 0)
                             NumberPaginator(
+                              initialPage: currentPage,
                               numberPages: (data.length / 5.0) >
                                       (data.length / 5.0).round()
                                   ? (((data.length / 5.0) + 1.0).round())

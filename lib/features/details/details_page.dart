@@ -110,7 +110,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       }
                       if (element.localName == 'div' &&
                           element.classes.contains('wd-date')) {
-                        return const SizedBox.shrink();
+                        return const SizedBox();
                       }
                       return null;
                     },

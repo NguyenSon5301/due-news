@@ -30,6 +30,13 @@ class StringManager {
   static const scorePart2 = 'Điểm thành phần 2';
   static const scorePart3 = 'Điểm thành phần 3';
   static const averageScore = 'Điểm trung bình';
+  static const classScoreExtracuricularActivity =
+      'Kết quả hoạt động ngoại khóa của sinh viên: ';
+
+  /* Login */
+  static const password = 'Mật khẩu';
+  static const idStudent = 'ID sinh viên';
+
 
   /* Tabbar */
   static const titleInformationPage = 'Trang thông tin';
@@ -38,7 +45,13 @@ class StringManager {
   static const titleSaveButton = 'Lưu trữ';
   static const logout = 'Đăng xuất';
   static const login = 'Đăng nhập';
-
+  static const changePassword = 'Đổi mật khẩu';
+  static const oldPassword = 'Mật khẩu cũ';
+  static const newPassword = 'Mật khẩu mới';
+  static const againNewPassword = 'Nhập lại mật khẩu mới';
+  static const requiredTyping = 'Yêu cầu nhập';
+  static const atLeastPassword = 'Mật khẩu phải bao gồm 8 chữ số';
+  static const typingPasswordAgainWrong = 'Nhập lại mật khẩu mới không đúng';
   /* Save News */
   static const titleSavePage = 'CÁC TIN TỨC ĐÃ ĐƯỢC LƯU';
 
