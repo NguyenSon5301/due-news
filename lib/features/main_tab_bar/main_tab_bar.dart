@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../gen/assets.gen.dart';
 import '../../common/colors/app_color.dart';
+import '../../common/constants/constant.dart';
+import '../../common/gen/assets.gen.dart';
 import '../../models/firebaseuser.dart';
 import '../../services/database_service.dart';
 import '../admin/add_extracurricular/add_extracurricular_page.dart';
+import '../admin/add_news/add_news_page.dart';
 import '../home/home_page.dart';
 import '../news_collection/news_collection_page.dart';
 import '../page/page.dart';
@@ -29,8 +31,9 @@ class _MainTabBarState extends State<MainTabBar> {
     const ScorePage(),
     const NewsCollectionPage(),
     const AddExtracurricularPage(),
+    const AddNewsPage(),
     SamplePage(
-      title: 'Trang thông tin',
+      title: StringManager.titleInformationPage,
     ),
   ];
 
@@ -62,7 +65,7 @@ class _MainTabBarState extends State<MainTabBar> {
             children: [
               BottomIconWidget(
                 isSelect: pageIndex == 0,
-                title: 'Tin tức',
+                title: StringManager.titleNewsPage,
                 iconName: pageIndex == 0
                     ? Assets.icons.icSelectedHome.path
                     : Assets.icons.icUnselectedHome.path,
@@ -81,13 +84,12 @@ class _MainTabBarState extends State<MainTabBar> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       var DocData = snapshot.data;
-
                       return Row(
                         children: [
                           if (DocData['role'].contains('user')) ...[
                             BottomIconWidget(
                               isSelect: pageIndex == 1,
-                              title: 'Điểm số',
+                              title: StringManager.titleScorePage,
                               iconName: pageIndex == 1
                                   ? Assets.icons.icSelectedSearchNormal.path
                                   : Assets.icons.icUnselectedSearchNormal.path,
@@ -102,7 +104,7 @@ class _MainTabBarState extends State<MainTabBar> {
                             ),
                             BottomIconWidget(
                               isSelect: pageIndex == 2,
-                              title: 'Lưu trữ',
+                              title: StringManager.titleSaveButton,
                               iconName: pageIndex == 2
                                   ? Assets.icons.icSelectedArchive.path
                                   : Assets.icons.icUnselectedArchive.path,
@@ -119,7 +121,7 @@ class _MainTabBarState extends State<MainTabBar> {
                           if (DocData['role'].contains('admin')) ...[
                             BottomIconWidget(
                               isSelect: pageIndex == 3,
-                              title: 'Lưu trữ',
+                              title: StringManager.scoreExtracuricularActivity,
                               iconName: pageIndex == 3
                                   ? Assets.icons.icSelectedArchive.path
                                   : Assets.icons.icUnselectedArchive.path,
@@ -129,6 +131,24 @@ class _MainTabBarState extends State<MainTabBar> {
                               tap: () {
                                 setState(() {
                                   pageIndex = 3;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 150,
+                            ),
+                            BottomIconWidget(
+                              isSelect: pageIndex == 4,
+                              title: StringManager.addNewsTitle,
+                              iconName: pageIndex == 4
+                                  ? Assets.icons.icSelectedArchive.path
+                                  : Assets.icons.icUnselectedArchive.path,
+                              iconColor: pageIndex == 4
+                                  ? Theme.of(context).primaryColor
+                                  : AppColors.gray,
+                              tap: () {
+                                setState(() {
+                                  pageIndex = 4;
                                 });
                               },
                             ),
@@ -142,17 +162,18 @@ class _MainTabBarState extends State<MainTabBar> {
                 )
               ],
               BottomIconWidget(
-                isSelect: pageIndex == 4,
-                title: user != null ? 'Đăng xuất' : 'Đăng nhập',
-                iconName: pageIndex == 4
+                isSelect: pageIndex == 5,
+                title:
+                    user != null ? StringManager.logout : StringManager.login,
+                iconName: pageIndex == 5
                     ? Assets.icons.icSelectedUser.path
                     : Assets.icons.icUnselectedUser.path,
-                iconColor: pageIndex == 4
+                iconColor: pageIndex == 5
                     ? Theme.of(context).primaryColor
                     : AppColors.gray,
                 tap: () {
                   setState(() {
-                    pageIndex = 4;
+                    pageIndex = 5;
                   });
                 },
               ),

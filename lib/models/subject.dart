@@ -20,7 +20,7 @@ class Subject {
   factory Subject.fromJson(Map<String, dynamic> json) {
     return Subject(
       idSubject: json['iDSubject'] ?? '',
-      nameSubject: json['nameSubject'] ?? '',
+      nameSubject: json['nameSubject'] ?? '', 
       note: json['note'] ?? '',
       credit: json['credit'] != null ? int.parse(json['credit'].toString()) : 0,
       score1:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/constants/constant.dart';
 import '../../utils/utils.dart';
 import 'clock_widget.dart';
 
@@ -19,7 +20,7 @@ class HomeHeaderWidget extends StatelessWidget {
             Text(
               'Good morning',
               style: SafeGoogleFont(
-                'Mulish',
+                StringManager.mulish,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 height: 1.4,
@@ -27,10 +28,10 @@ class HomeHeaderWidget extends StatelessWidget {
               ),
             ),
             Text(
-              'DUE News',
+              StringManager.appName,
               textAlign: TextAlign.center,
               style: SafeGoogleFont(
-                'Mulish',
+                StringManager.mulish,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
                 height: 1.3,

@@ -2,18 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../common/common.dart';
-import '../../../common/constants/dynamic_link_constant.dart';
-import '../../../gen/assets.gen.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../common/common.dart';
+import '../../../common/constants/constant.dart';
+import '../../../common/gen/assets.gen.dart';
 import '../../../models/firebaseuser.dart';
 import '../../../services/database_service.dart';
 import '../../../services/link_services.dart';
 import '../../home/widgets/round_icon_button_widget.dart';
 import '../../utils/utils.dart';
-import '../../widgets/spacer/spacer_custom.dart';
 
 class DetailsHeaderWidget extends StatefulWidget {
   const DetailsHeaderWidget({
@@ -45,9 +43,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
         image: DecorationImage(
           opacity: 0.5,
           fit: BoxFit.cover,
-          image: NetworkImage(
-            'https://res.cloudinary.com/dbprtaixx/image/upload/v1679071481/10947451_882935715096795_3355128569306577293_o_cyz5gb.jpg',
-          ),
+          image: AssetImage('assets/images/rectangle-6537-bg.png'),
         ),
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(20),
@@ -55,7 +51,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24.0, 45, 24, 0),
+        padding: const EdgeInsets.fromLTRB(24, 45, 24, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -94,9 +90,6 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                 ),
               ],
             ),
-            const CustomHeightSpacer(
-              size: 0.2,
-            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
@@ -109,21 +102,21 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                         Text(
                           widget.title,
                           style: SafeGoogleFont(
-                            'Mulish',
+                            StringManager.mulish,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             height: 1.3,
-                            color: AppColors.black,
+                            color: AppColors.white,
                           ),
                         ),
                         Text(
                           widget.time,
                           style: SafeGoogleFont(
-                            'Mulish',
+                            StringManager.mulish,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             height: 1.4,
-                            color: AppColors.black,
+                            color: AppColors.lightGray,
                           ),
                         ),
                       ],
@@ -176,14 +169,14 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                                   if (index > -1) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content: Text('Bài báo đã được xóa'),
+                                        content:
+                                            Text(StringManager.removeSaveNews),
                                       ),
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content:
-                                            Text('Bài báo đã được lưu lại'),
+                                        content: Text(StringManager.saveNews),
                                       ),
                                     );
                                   }

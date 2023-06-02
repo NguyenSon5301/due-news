@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as html_parser;
-import 'package:html/dom.dart' as htmlDom;
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../common/common.dart';
 import 'widgets/details_header_widget.dart';
@@ -110,7 +109,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       }
                       if (element.localName == 'div' &&
                           element.classes.contains('wd-date')) {
-                        return const SizedBox.shrink();
+                        return const SizedBox();
                       }
                       return null;
                     },
@@ -147,7 +146,7 @@ class _DetailsPageState extends State<DetailsPage> {
             //   child: Text(
             //     'An exhibition exploring 350 years of relations between the Japanese and British royal families has opened at the Queen’s Gallery near Buckingham Palace, the London home of the British monarchy.',
             //     style: SafeGoogleFont(
-            //       'Mulish',
+            //      StringManager.mulish,
             //       fontSize: 14,
             //       fontWeight: FontWeight.w400,
             //       height: 1.8,
@@ -160,7 +159,7 @@ class _DetailsPageState extends State<DetailsPage> {
             //   child: Text(
             //     'UK-Japan royal relationship',
             //     style: SafeGoogleFont(
-            //       'Mulish',
+            //      StringManager.mulish,
             //       fontSize: 16,
             //       fontWeight: FontWeight.w700,
             //       height: 1.3,
@@ -173,7 +172,7 @@ class _DetailsPageState extends State<DetailsPage> {
             //   child: Text(
             //     'The exhibition features some 150 items from the royal family’s permanent collection, many of which were gifted to British royals by Japanese emperors and shoguns and are on public display for the first time.\n\nCurator Rachel Peat said the “stunning” works have “profoundly shaped British taste and helped forge a lasting relationship between the two nations.”',
             //     style: SafeGoogleFont(
-            //       'Mulish',
+            //      StringManager.mulish,
             //       fontSize: 14,
             //       fontWeight: FontWeight.w400,
             //       height: 1.8,

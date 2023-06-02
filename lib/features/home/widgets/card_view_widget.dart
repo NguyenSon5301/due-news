@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/colors/app_color.dart';
+import '../../../common/constants/constant.dart';
 import '../../utils/utils.dart';
 import '../../widgets/spacer/spacer_custom.dart';
 
@@ -73,7 +74,7 @@ class CardViewWidget extends StatelessWidget {
                     Text(
                       titleNews,
                       style: SafeGoogleFont(
-                        'Mulish',
+                        StringManager.mulish,
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
                         height: 1.3,
@@ -86,7 +87,7 @@ class CardViewWidget extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                         style: SafeGoogleFont(
-                          'Mulish',
+                          StringManager.mulish,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                           height: 1.4,
@@ -96,7 +97,7 @@ class CardViewWidget extends StatelessWidget {
                           TextSpan(
                             text: publishedDate,
                             style: SafeGoogleFont(
-                              'Mulish',
+                              StringManager.mulish,
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
                               height: 1.4,

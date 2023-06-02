@@ -8,17 +8,17 @@ import '../../../models/extracurricular.dart';
 import '../../../services/database_service.dart';
 import '../../utils/utils.dart';
 
-class AddExtracurricularPage extends StatefulWidget {
-  const AddExtracurricularPage({
+class AddNewsPage extends StatefulWidget {
+  const AddNewsPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddExtracurricularPage> createState() => _AddExtracurricularPageState();
+  State<AddNewsPage> createState() => _AddNewsPageState();
 }
 
-class _AddExtracurricularPageState extends State<AddExtracurricularPage>
-    with AutomaticKeepAliveClientMixin<AddExtracurricularPage> {
+class _AddNewsPageState extends State<AddNewsPage>
+    with AutomaticKeepAliveClientMixin<AddNewsPage> {
   int currentPage = 0;
   DatabaseService db = DatabaseService();
   List<DropdownMenuItem> listSemester = [];

@@ -6,6 +6,7 @@ import 'package:number_paginator/number_paginator.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../common/common.dart';
+import '../../common/constants/constant.dart';
 import '../../common/singleton/category_news_singleton.dart';
 import '../../models/data.dart';
 import '../../models/news.dart';
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage>
       ..stream.listen((event) {
         setState(() {
           categoryStr = event;
+          currentPage = 0;
         });
       });
     LinkService.ins.initDynamicLinks();
@@ -81,10 +83,10 @@ class _HomePageState extends State<HomePage>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'THÔNG BÁO',
+                      StringManager.homeCaption,
                       textAlign: TextAlign.start,
                       style: SafeGoogleFont(
-                        'Mulish',
+                        StringManager.mulish,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                         height: 1.2,
@@ -163,6 +165,7 @@ class _HomePageState extends State<HomePage>
                           ],
                           if (data.length != 0)
                             NumberPaginator(
+                              initialPage: currentPage,
                               numberPages: (data.length / 5.0) >
                                       (data.length / 5.0).round()
                                   ? (((data.length / 5.0) + 1.0).round())

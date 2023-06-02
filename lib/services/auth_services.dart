@@ -51,6 +51,37 @@ class AuthService {
     }
   }
 
+  Future<bool> checkPassword(String password) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final credential = EmailAuthProvider.credential(
+          email: user.email ?? '',
+          password: password,
+        );
+        await user.reauthenticateWithCredential(credential);
+        return true;
+      }
+      return false;
+    } on Exception catch (e) {
+      // Handle exceptions
+      return false;
+    }
+  }
+
+  Future changePassword(String password) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      await user?.updatePassword(password).then((_) {
+        print("Successfully changed password");
+      }).catchError((error) {
+        print("Password can't be changed" + error.toString());
+      });
+    } on Exception catch (e) {
+      return false;
+    }
+  }
+
   Future signOut() async {
     try {
       return await _auth.signOut();

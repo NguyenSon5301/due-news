@@ -4,6 +4,7 @@ import 'package:number_paginator/number_paginator.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/common.dart';
+import '../../common/constants/constant.dart';
 import '../../models/news.dart';
 import '../../services/database_service.dart';
 import '../details/details_page.dart';
@@ -148,10 +149,10 @@ class _NewsCollectionPageState extends State<NewsCollectionPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'CÁC TIN TỨC ĐÃ ĐƯỢC LƯU',
+          StringManager.titleSavePage,
           textAlign: TextAlign.center,
           style: SafeGoogleFont(
-            'Mulish',
+            StringManager.mulish,
             fontSize: 18,
             fontWeight: FontWeight.w700,
             height: 1.2,

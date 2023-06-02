@@ -10,11 +10,14 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 
 import '../../common/common.dart';
+import '../../common/constants/constant.dart';
 import '../../models/firebaseuser.dart';
 import '../../services/auth_services.dart';
 import '../authentification/login/login_page.dart';
+import '../home/home_page.dart';
 import '../main_tab_bar/main_tab_bar.dart';
 import '../utils/utils.dart';
+import 'change_password.dart';
 
 class SamplePage extends StatefulWidget {
   SamplePage({Key? key, required this.title}) : super(key: key);
@@ -57,7 +60,7 @@ class _SamplePageState extends State<SamplePage> {
                 Text(
                   widget.title,
                   style: SafeGoogleFont(
-                    'Mulish',
+                    StringManager.mulish,
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     height: 1.2575,
@@ -65,9 +68,10 @@ class _SamplePageState extends State<SamplePage> {
                     color: Color(0xff1e2022),
                   ),
                 ),
-                if (widget.title.contains('Trang thông tin')) ...[
+                if (widget.title
+                    .contains(StringManager.titleInformationPage)) ...[
                   if (user != null) ...[
-                    if (userAuth != null)
+                    if (userAuth != null) ...[
                       //   TextFormField(
                       //     controller: _email,
                       //     autofocus: false,
@@ -297,6 +301,17 @@ class _SamplePageState extends State<SamplePage> {
                       // // }), child: child),
                       CustomButton(
                         onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const ChangePassword(),
+                            ),
+                          );
+                        },
+                        buttonLabel: StringManager.changePassword,
+                        color: AppColors.blueLight,
+                      ),
+                      CustomButton(
+                        onPressed: () {
                           auth.signOut();
                           Navigator.pushReplacement(
                             context,
@@ -305,9 +320,10 @@ class _SamplePageState extends State<SamplePage> {
                             ),
                           );
                         },
-                        buttonLabel: 'Đăng xuất',
+                        buttonLabel: StringManager.logout,
                         color: AppColors.red,
-                      )
+                      ),
+                    ]
                   ] else
                     CustomButton(
                       onPressed: () {
@@ -318,7 +334,7 @@ class _SamplePageState extends State<SamplePage> {
                           ),
                         );
                       },
-                      buttonLabel: 'Đăng nhập',
+                      buttonLabel: StringManager.login,
                       color: AppColors.red,
                     )
                 ]
@@ -455,7 +471,7 @@ class _SamplePageState extends State<SamplePage> {
 //                 Text(
 //                   widget.title,
 //                   style: SafeGoogleFont(
-//                     'Mulish',
+//                    StringManager.mulish,
 //                     fontSize: 17,
 //                     fontWeight: FontWeight.w600,
 //                     height: 1.2575,
@@ -463,7 +479,7 @@ class _SamplePageState extends State<SamplePage> {
 //                     color: Color(0xff1e2022),
 //                   ),
 //                 ),
-//                 if (widget.title.contains('Trang thông tin')) ...[
+//                 if (widget.title.contains(StringManager.titleInformationPage)) ...[
 //                   if (user != null) ...[
 //                     if (userAuth != null)
 //                       TextFormField(
