@@ -12,7 +12,6 @@ import '../../../services/database_service.dart';
 import '../../../services/link_services.dart';
 import '../../home/widgets/round_icon_button_widget.dart';
 import '../../utils/utils.dart';
-import '../../widgets/spacer/spacer_custom.dart';
 
 class DetailsHeaderWidget extends StatefulWidget {
   const DetailsHeaderWidget({

@@ -1161,7 +1161,6 @@ class _ScorePageState extends State<ScorePage>
       context: context,
       initialDate: userInfo.birthDate!,
       firstDate: DateTime(1950),
-      //DateTime.now() - not to allow to choose before today.
       lastDate: DateTime(2100),
     );
 

@@ -1,0 +1,23 @@
+{
+    "name": "DUE News",
+    "short_name": "DUE News",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "An example todos app that showcases bloc state management patterns.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/logo_due.jpg",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/logo_due.jpg",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -19,6 +19,7 @@ class StringManager {
   static const selectSearchType = 'Chọn kiểu tra cứu';
   static const scoreSuject = 'Điểm học phần';
   static const scoreExtracuricularActivity = 'Điểm ngoại khóa';
+  static const addNewsTitle = 'Thêm tin tức';
   static const ordinalNumberTable = 'STT';
   static const semesterTable = 'Học kỳ';
   static const nameActivityTable = 'Tên hoạt động';
