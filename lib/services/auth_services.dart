@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../models/loginuser.dart';
+
 import '../../models/firebaseuser.dart';
+import '../../models/loginuser.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,7 +29,7 @@ class AuthService {
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: login.email.toString(),
-              password: login.password.toString());
+              password: login.password.toString(),);
       final user = userCredential.user;
       return _firebaseUser(user);
     } on FirebaseAuthException catch (e) {
@@ -41,7 +42,7 @@ class AuthService {
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: login.email.toString(),
-              password: login.password.toString());
+              password: login.password.toString(),);
       final user = userCredential.user;
       return _firebaseUser(user);
     } on FirebaseAuthException catch (e) {
@@ -63,7 +64,7 @@ class AuthService {
         return true;
       }
       return false;
-    } on Exception catch (e) {
+    } on Exception {
       // Handle exceptions
       return false;
     }
@@ -73,11 +74,11 @@ class AuthService {
     try {
       final user = FirebaseAuth.instance.currentUser;
       await user?.updatePassword(password).then((_) {
-        print("Successfully changed password");
+        print('Successfully changed password');
       }).catchError((error) {
-        print("Password can't be changed" + error.toString());
+        print("Password can't be changed$error");
       });
-    } on Exception catch (e) {
+    } on Exception {
       return false;
     }
   }

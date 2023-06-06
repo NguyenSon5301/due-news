@@ -92,7 +92,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
               child: Row(
                 children: [
                   Expanded(
@@ -186,7 +186,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                           } else {
                             return const CircularProgressIndicator();
                           }
-                        })
+                        },)
                 ],
               ),
             )

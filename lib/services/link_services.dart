@@ -3,8 +3,6 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 
 import '../common/constants/dynamic_link_constant.dart';
-import '../features/details/details_page.dart';
-import '../models/news.dart';
 
 class LinkService {
   static final navigatorKey = GlobalKey<NavigatorState>();
@@ -23,11 +21,11 @@ class LinkService {
             .get()
             .then((value) async {
           if (value.exists) {
-            Map<String, dynamic>? data = value.data();
+            final data = value.data();
 
-            var titleNews = data!['titleNews'];
-            var description = data['description'];
-            var publishedDate = data['publishedDate'];
+            final titleNews = data!['titleNews'];
+            final description = data['description'];
+            final publishedDate = data['publishedDate'];
             await Navigator.pushNamed(
               navigatorKey.currentContext!,
               dynamicLinkData.link.path,

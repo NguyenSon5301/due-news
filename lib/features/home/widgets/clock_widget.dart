@@ -54,6 +54,6 @@ class _ClockWidgetState extends State<ClockWidget> {
           fontWeight: FontWeight.bold,
         ),
       ),
-    ]);
+    ],);
   }
 }

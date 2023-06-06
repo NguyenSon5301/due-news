@@ -25,7 +25,7 @@ class RouteServices {
         );
       case '/news':
         if (args is Map) {
-          Timestamp t = args['publishedDate'] ?? Timestamp.now();
+          final Timestamp t = args['publishedDate'] ?? Timestamp.now();
           final d = t.toDate();
           final dateOnly = DateFormat('dd/MM/yyyy').format(d);
           return CupertinoPageRoute(

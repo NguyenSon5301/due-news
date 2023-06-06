@@ -92,11 +92,11 @@ class _Login extends State<Login> {
         color: AppColors.blueLight,
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
-            QuerySnapshot snap = await FirebaseFirestore.instance
+            final QuerySnapshot snap = await FirebaseFirestore.instance
                 .collection('User')
                 .where('idStudent', isEqualTo: _email.text)
                 .get();
-            dynamic result = await _auth.signInEmailPassword(
+            final dynamic result = await _auth.signInEmailPassword(
               LoginUser(email: snap.docs[0]['email'], password: _password.text),
             );
             if (result.uid == null) {
@@ -113,11 +113,11 @@ class _Login extends State<Login> {
             await Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => MainTabBar(),
+                builder: (context) => const MainTabBar(),
               ),
             );
           }
-        });
+        },);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -182,7 +182,7 @@ class _Login extends State<Login> {
               ),
             ],
           ),
-        )),
+        ),),
       ),
     );
   }
