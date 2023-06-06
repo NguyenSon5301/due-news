@@ -24,7 +24,7 @@ class HomeHeaderWidget extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 height: 1.4,
-                color: Color(0xff94a5aa),
+                color: const Color(0xff94a5aa),
               ),
             ),
             Text(
@@ -35,7 +35,7 @@ class HomeHeaderWidget extends StatelessWidget {
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
                 height: 1.3,
-                color: Color(0xff1a434e),
+                color: const Color(0xff1a434e),
               ),
             )
           ],

@@ -8,7 +8,6 @@ import 'package:rxdart/subjects.dart';
 import '../../common/common.dart';
 import '../../common/constants/constant.dart';
 import '../../common/singleton/category_news_singleton.dart';
-import '../../models/data.dart';
 import '../../models/news.dart';
 import '../../services/database_service.dart';
 import '../../services/link_services.dart';
@@ -36,11 +35,12 @@ class _HomePageState extends State<HomePage>
   String? categoryStr;
   DatabaseService db = DatabaseService();
   int currentPage = 0;
+  List<String> listCategoryNews = [];
 
   @override
   void initState() {
     super.initState();
-
+    _loadInitCategoryNews();
     CategoryNews.ins.category$ = BehaviorSubject<String?>.seeded(null)
       ..stream.listen((event) {
         setState(() {
@@ -55,6 +55,20 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     CategoryNews.ins.category$?.close();
     super.dispose();
+  }
+
+  void _loadInitCategoryNews() {
+    db.getCategoryNewsList().then(
+          (value) => {
+            setState(() {
+              value
+                  .map(
+                    (e) => listCategoryNews.add(e.nameCategory),
+                  )
+                  .toList();
+            })
+          },
+        );
   }
 
   @override
@@ -110,8 +124,8 @@ class _HomePageState extends State<HomePage>
                 const CustomHeightSpacer(
                   size: 0.02,
                 ),
-                const HorizontalCategoryList(
-                  items: myCategory,
+                HorizontalCategoryList(
+                  items: listCategoryNews,
                 ),
                 StreamBuilder<QuerySnapshot>(
                   stream: db.getNewsWithCategory(categoryStr),
@@ -163,7 +177,7 @@ class _HomePageState extends State<HomePage>
                               height: 50,
                             )
                           ],
-                          if (data.length != 0)
+                          if (data.isNotEmpty)
                             NumberPaginator(
                               initialPage: currentPage,
                               numberPages: (data.length / 5.0) >

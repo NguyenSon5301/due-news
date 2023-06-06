@@ -1,26 +1,24 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/common.dart';
 import '../../common/constants/constant.dart';
 import '../../models/firebaseuser.dart';
 import '../../services/auth_services.dart';
 import '../authentification/login/login_page.dart';
-import '../home/home_page.dart';
 import '../main_tab_bar/main_tab_bar.dart';
 import '../utils/utils.dart';
 import 'change_password.dart';
 
 class SamplePage extends StatefulWidget {
-  SamplePage({Key? key, required this.title}) : super(key: key);
+  const SamplePage({required this.title, Key? key}) : super(key: key);
 
   final String title;
 
@@ -65,7 +63,7 @@ class _SamplePageState extends State<SamplePage> {
                     fontWeight: FontWeight.w600,
                     height: 1.2575,
                     letterSpacing: 1,
-                    color: Color(0xff1e2022),
+                    color: const Color(0xff1e2022),
                   ),
                 ),
                 if (widget.title
@@ -381,28 +379,27 @@ class _SamplePageState extends State<SamplePage> {
     } catch (e) {
       rethrow;
     }
+    return null;
   }
 
   Future<File?> cropImage(File input) async {
     try {
-      if (input.path != null) {
-        final file = await ImageCropper().cropImage(
-          sourcePath: input.path,
-          aspectRatioPresets: const [CropAspectRatioPreset.square],
-          uiSettings: [
-            AndroidUiSettings(
-              toolbarTitle: 'Crop image',
-              initAspectRatio: CropAspectRatioPreset.square,
-              hideBottomControls: true,
-            ),
-            // IOSUiSettings(
-            //   title: 'Crop image',
-            // ),
-          ],
-        );
-        if (file != null) {
-          return File(file.path);
-        }
+      final file = await ImageCropper().cropImage(
+        sourcePath: input.path,
+        aspectRatioPresets: const [CropAspectRatioPreset.square],
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Crop image',
+            initAspectRatio: CropAspectRatioPreset.square,
+            hideBottomControls: true,
+          ),
+          // IOSUiSettings(
+          //   title: 'Crop image',
+          // ),
+        ],
+      );
+      if (file != null) {
+        return File(file.path);
       }
       return null;
     } catch (e) {

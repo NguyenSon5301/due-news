@@ -20,7 +20,7 @@ class UserInfomation {
       name: json['iDSubject'] ?? '',
       birthDate: json['birthDate'] != null
           ? DateTime.fromMillisecondsSinceEpoch(
-              json['birthDate'].millisecondsSinceEpoch)
+              json['birthDate'].millisecondsSinceEpoch,)
           : null,
       classRoom: json['classRoom'] ?? '',
       level: json['level'] ?? '',

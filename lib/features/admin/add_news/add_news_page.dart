@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:search_choices/search_choices.dart';
 
 import '../../../common/common.dart';
 import '../../../common/constants/constant.dart';
-import '../../../models/extracurricular.dart';
 import '../../../services/database_service.dart';
 import '../../utils/utils.dart';
 
@@ -21,63 +22,73 @@ class _AddNewsPageState extends State<AddNewsPage>
     with AutomaticKeepAliveClientMixin<AddNewsPage> {
   int currentPage = 0;
   DatabaseService db = DatabaseService();
-  List<DropdownMenuItem> listSemester = [];
-  List<DropdownMenuItem> listNameActivity = [];
-  List<Extracurricular> listCategoryScore = [];
+  final TextEditingController _titleField = TextEditingController();
+  DateTime currentPickedDate = DateTime.now();
+  int max = 0;
+  List<DropdownMenuItem> listCategoryNews = [];
+  String selectedCategoryNews = StringManager.typeCategoryNews;
 
-  final TextEditingController _scoreField = TextEditingController();
-  final TextEditingController _idStudentField = TextEditingController();
+  late QuillEditorController descriptionController;
 
-  String selectedSemester = StringManager.selectSemester;
-  String selectedActivity = StringManager.selectNameActivity;
+  final customToolBarList = [
+    ToolBarStyle.bold,
+    ToolBarStyle.italic,
+    ToolBarStyle.align,
+    ToolBarStyle.color,
+    ToolBarStyle.background,
+    ToolBarStyle.listBullet,
+    ToolBarStyle.listOrdered,
+    ToolBarStyle.clean,
+    ToolBarStyle.addTable,
+    ToolBarStyle.editTable,
+  ];
+
+  final _toolbarColor = Colors.grey.shade200;
+  final _backgroundColor = Colors.white70;
+  final _toolbarIconColor = Colors.black87;
+  final _editorTextStyle = const TextStyle(
+    fontSize: 18,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
+  );
+  final _hintTextStyle = const TextStyle(
+    fontSize: 18,
+    color: Colors.black12,
+    fontWeight: FontWeight.normal,
+  );
+
   @override
   bool get wantKeepAlive => true;
   @override
   void initState() {
     super.initState();
-    _loadInitSemester();
-    _loadInitActivity();
+    descriptionController = QuillEditorController();
+
+    _loadInitCategoryNews();
   }
 
-  List<String> items = [StringManager.selectSemester];
-  String kCities = StringManager.selectSemester;
+  @override
+  void dispose() {
+    descriptionController.dispose();
+    super.dispose();
+  }
 
-  void _loadInitSemester() {
-    db.getSemesterList().then(
+  void _loadInitCategoryNews() {
+    db.getCategoryNewsList().then(
           (value) => {
             setState(() {
               value
                   .map(
-                    (e) => listSemester.add(
+                    (e) => listCategoryNews.add(
                       DropdownMenuItem(
-                        value: e.nameSemester,
+                        value: e.nameCategory,
                         child: Text(
-                          e.nameSemester,
+                          e.nameCategory,
                         ),
                       ),
                     ),
                   )
                   .toList();
-            })
-          },
-        );
-  }
-
-  void _loadInitActivity() {
-    db.getExtracurricularList().then(
-          (value) => {
-            setState(() {
-              value.map((e) {
-                listNameActivity.add(
-                  DropdownMenuItem(
-                    value: e.nameActivity,
-                    child: Text(
-                      e.nameActivity,
-                    ),
-                  ),
-                );
-                listCategoryScore.add(e);
-              }).toList();
             })
           },
         );
@@ -102,16 +113,19 @@ class _AddNewsPageState extends State<AddNewsPage>
                   children: [
                     _sizedBox(50),
                     _header(),
+                    _sizedBox(50),
+                    _idNews(),
                     _sizedBox(20),
-                    _semesterRow(),
+                    _titleNewsRow(),
                     _sizedBox(20),
-                    _nameActivityRow(),
+                    _publishedDateRow(),
                     _sizedBox(20),
-                    _scoreRow(),
+                    _categoryNewsRow(),
                     _sizedBox(20),
-                    _idStudent(),
+                    _descriptionNewsRow(),
                     _sizedBox(30),
                     _buttonSave(),
+                    _sizedBox(30),
                   ],
                 ),
               ),
@@ -129,9 +143,10 @@ class _AddNewsPageState extends State<AddNewsPage>
   Widget _header() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          StringManager.captionAdmin,
+          StringManager.captionAdminNews,
           textAlign: TextAlign.center,
           style: SafeGoogleFont(
             StringManager.mulish,
@@ -145,186 +160,396 @@ class _AddNewsPageState extends State<AddNewsPage>
     );
   }
 
-  Widget _semesterRow() {
+  Widget _idNews() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: db.getNewsWithCategory(null),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          for (var i = 0; i < snapshot.data.docs.length; i++) {
+            if (int.parse(snapshot.data.docs[i].reference.id) > max) {
+              max = int.parse(snapshot.data.docs[i].reference.id);
+            }
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                color: Colors.transparent,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Table(
+                  columnWidths: const {
+                    0: FixedColumnWidth(200),
+                    1: FixedColumnWidth(500),
+                  },
+                  children: [
+                    TableRow(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 18,
+                          ),
+                          child: Text(
+                            '${StringManager.idNews}:',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 18,
+                          ),
+                          child: Text(
+                            (max + 1).toString(),
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
+  }
+
+  Widget _titleNewsRow() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(
-          width: 120,
-          child: Text(StringManager.semesterAdmin),
-        ),
-        SizedBox(
-          width: 200,
-          child: SearchChoices.single(
-            items: listSemester,
-            value: selectedSemester,
-            hint: StringManager.selectSemester,
-            searchHint: StringManager.selectSemester,
-            onChanged: (value) {
-              setState(() {
-                selectedSemester = value;
-              });
+        Container(
+          color: Colors.transparent,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Table(
+            columnWidths: const {
+              0: FixedColumnWidth(200),
+              1: FixedColumnWidth(500),
             },
-            isExpanded: true,
+            children: [
+              TableRow(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+                    child: Text(
+                      '${StringManager.titleNews}:',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _titleField,
+                    decoration: const InputDecoration(
+                      labelText: StringManager.typeTitleNews,
+                      border: OutlineInputBorder(),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red, width: 5),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
 
-  Widget _nameActivityRow() {
+  Widget _publishedDateRow() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(
-          width: 120,
-          child: Text(StringManager.nameActivityAdmin),
-        ),
-        SizedBox(
-          width: 200,
-          child: SearchChoices.single(
-            items: listNameActivity,
-            value: selectedActivity,
-            hint: StringManager.selectNameActivity,
-            searchHint: StringManager.selectNameActivity,
-            onChanged: (value) {
-              setState(() {
-                selectedActivity = value;
-              });
+        Container(
+          color: Colors.transparent,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Table(
+            columnWidths: const {
+              0: FixedColumnWidth(200),
+              1: FixedColumnWidth(500),
             },
-            isExpanded: true,
+            children: [
+              TableRow(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+                    child: Text(
+                      '${StringManager.pubLishedDate}:',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await _pickDate();
+                    },
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          child: Text(
+                            DateFormat('dd/MM/yyyy').format(currentPickedDate),
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            await _pickDate();
+                          },
+                          icon: const Icon(
+                            Icons.date_range_outlined,
+                            size: 20,
+                            color: AppColors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
 
-  Widget _scoreRow() {
+  Future<void> _pickDate() async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: currentPickedDate,
+      firstDate: DateTime(1950),
+      lastDate: DateTime(2100),
+    );
+    if (pickedDate != null) {
+      setState(() {
+        currentPickedDate = pickedDate;
+      });
+    }
+  }
+
+  Widget _categoryNewsRow() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(
-          width: 120,
-          child: Text(StringManager.scoreAdmin),
+        Container(
+          color: Colors.transparent,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Table(
+            columnWidths: const {
+              0: FixedColumnWidth(200),
+              1: FixedColumnWidth(500),
+            },
+            children: [
+              TableRow(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+                    child: Text(
+                      '${StringManager.categoryNews}:',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 200,
+                    child: SearchChoices.single(
+                      items: listCategoryNews,
+                      value: selectedCategoryNews,
+                      hint: StringManager.typeCategoryNews,
+                      searchHint: StringManager.typeCategoryNews,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedCategoryNews = value;
+                        });
+                      },
+                      isExpanded: true,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
-        SizedBox(
-          width: 200,
-          child: TextFormField(
-            controller: _scoreField,
-            decoration: const InputDecoration(
-              labelText: StringManager.typeScoreAdmin,
-              border: OutlineInputBorder(),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 5),
+      ],
+    );
+  }
+
+  Widget _descriptionNewsRow() {
+    return Column(
+      children: [
+        const Text(
+          StringManager.descriptionNews,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 100,
+            vertical: 20,
+          ),
+          child: Card(
+            elevation: 10,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Card(
+                    elevation: 10,
+                    color: AppColors.white,
+                    child: SizedBox(
+                      width: 1250,
+                      child: ToolBar.scroll(
+                        toolBarColor: _toolbarColor,
+                        padding: const EdgeInsets.all(8),
+                        iconSize: 25,
+                        iconColor: _toolbarIconColor,
+                        activeIconColor: Colors.greenAccent.shade400,
+                        controller: descriptionController,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        customButtons: [
+                          InkWell(
+                            onTap: unFocusEditor,
+                            child: const Icon(
+                              Icons.favorite,
+                              color: Colors.black,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              final selectedText =
+                                  await descriptionController.getSelectedText();
+                              debugPrint(
+                                'selectedText $selectedText',
+                              );
+                              final selectedHtmlText =
+                                  await descriptionController
+                                      .getSelectedHtmlText();
+                              debugPrint(
+                                'selectedHtmlText $selectedHtmlText',
+                              );
+                            },
+                            child: const Icon(
+                              Icons.add_circle,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100,
+                      vertical: 20,
+                    ),
+                    child: Card(
+                      elevation: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 20,
+                        ),
+                        child: Flexible(
+                          fit: FlexFit.tight,
+                          child: QuillHtmlEditor(
+                            text:
+                                '<h1>Hello</h1>This is a quill html editor example 😊',
+                            hintText: 'Hint text goes here',
+                            controller: descriptionController,
+                            isEnabled: true,
+                            minHeight: 500,
+                            textStyle: _editorTextStyle,
+                            hintTextStyle: _hintTextStyle,
+                            hintTextAlign: TextAlign.start,
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              top: 10,
+                            ),
+                            hintTextPadding: const EdgeInsets.only(
+                              left: 20,
+                            ),
+                            backgroundColor: _backgroundColor,
+                            onEditorCreated: () {
+                              setHtmlText(
+                                StringManager.typeDescriptionNews,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  Widget _idStudent() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          width: 120,
-          child: Text(StringManager.idStudentAdmin),
-        ),
-        SizedBox(
-          width: 200,
-          child: TextFormField(
-            controller: _idStudentField,
-            decoration: const InputDecoration(
-              labelText: StringManager.typeIDStudent,
-              border: OutlineInputBorder(),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 5),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
+  void unFocusEditor() => descriptionController.unFocus();
+  Future<void> setHtmlText(String text) async {
+    await descriptionController.setText(text);
   }
 
   Widget _buttonSave() {
     return SizedBox(
-        height: 50,
-        width: 200,
-        child: ElevatedButton.icon(
-          onPressed: _saveData,
-          icon: const Icon(Icons.save),
-          label: const Text('Save'),
-        ));
+      height: 50,
+      width: 200,
+      child: ElevatedButton.icon(
+        onPressed: _saveData,
+        icon: const Icon(Icons.save),
+        label: const Text('Lưu bài báo'),
+      ),
+    );
   }
 
   Future<void> _saveData() async {
-    if (selectedSemester.contains(StringManager.selectSemester)) {
-      _snackBar(StringManager.reportAdmin1);
-      return;
-    }
-    if (selectedActivity.contains(StringManager.selectNameActivity)) {
-      _snackBar(StringManager.reportAdmin2);
-      return;
-    }
-    if (_scoreField.text.isEmpty) {
-      _snackBar(StringManager.reportAdmin3);
-      return;
-    }
-    // final check = isNumeric(_scoreField.text);
-    if (!isNumeric(_scoreField.text)) {
-      _snackBar(StringManager.reportAdmin4);
-      return;
-    }
-    if (_idStudentField.text.isEmpty) {
-      _snackBar(StringManager.reportAdmin5);
-      return;
-    }
-    await db.getUserList(_idStudentField.text).then((value) async {
-      if (value.isEmpty) {
-        _snackBar(StringManager.reportAdmin6);
-        return;
-      }
-      var index = -1;
-      for (var i = 0; i < listNameActivity.length; i++) {
-        if (selectedActivity == listNameActivity[i].value) {
-          index = i;
-        }
-      }
-      if (index == -1) {
-        _snackBar(StringManager.reportAdmin7);
-        return;
-      }
-      var documentReference = FirebaseFirestore.instance
-          .collection('User')
-          .doc(value[0].email)
-          .collection('Extracurriculars');
+    if (_titleField.text.isEmpty) {
+      _snackBar(StringManager.requestTypeTitleNews);
+    } else if (selectedCategoryNews.contains(StringManager.typeCategoryNews)) {
+      _snackBar(StringManager.requestSelectCategory);
+    } else if (descriptionController.getText() ==
+        StringManager.typeDescriptionNews) {
+      _snackBar(StringManager.requestTypeDescription);
+    } else {
+      final getHtmlText = await descriptionController.getText();
+      final documentReference = FirebaseFirestore.instance
+          .collection('News')
+          .doc((max + 1).toString());
       final add = <String, dynamic>{
-        'categoryScore': listCategoryScore[index].categoryScore,
-        'nameActivity': selectedActivity,
-        'score': int.parse(_scoreField.text),
-        'semester': selectedSemester,
+        'category': selectedCategoryNews,
+        'description': getHtmlText,
+        'publishedDate': Timestamp.fromDate(currentPickedDate),
+        'titleNews': _titleField.text,
       };
-      await documentReference.add(add).then((value) {
+      await documentReference.set(add).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(StringManager.reportAdmin8),
           ),
         );
         setState(() {
-          _idStudentField.text = '';
-          _scoreField.text = '';
-          selectedSemester = StringManager.selectSemester;
-          selectedActivity = StringManager.selectNameActivity;
+          _titleField.text = '';
+          currentPickedDate = DateTime.now();
+          selectedCategoryNews = StringManager.typeCategoryNews;
+          descriptionController.setText(StringManager.typeDescriptionNews);
         });
       });
-    });
+    }
   }
 
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _snackBar(
@@ -349,10 +574,5 @@ class _AddNewsPageState extends State<AddNewsPage>
         ),
       ),
     );
-  }
-
-  bool isNumeric(String str) {
-    final numeric = RegExp(r'^-?[0-9]+$');
-    return numeric.hasMatch(str);
   }
 }

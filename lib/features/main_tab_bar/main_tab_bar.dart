@@ -32,7 +32,7 @@ class _MainTabBarState extends State<MainTabBar> {
     const NewsCollectionPage(),
     const AddExtracurricularPage(),
     const AddNewsPage(),
-    SamplePage(
+    const SamplePage(
       title: StringManager.titleInformationPage,
     ),
   ];
@@ -83,7 +83,7 @@ class _MainTabBarState extends State<MainTabBar> {
                   stream: db.getInformation(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      var DocData = snapshot.data;
+                      final DocData = snapshot.data;
                       return Row(
                         children: [
                           if (DocData['role'].contains('user')) ...[
@@ -141,8 +141,8 @@ class _MainTabBarState extends State<MainTabBar> {
                               isSelect: pageIndex == 4,
                               title: StringManager.addNewsTitle,
                               iconName: pageIndex == 4
-                                  ? Assets.icons.icSelectedArchive.path
-                                  : Assets.icons.icUnselectedArchive.path,
+                                  ? 'assets/icons/ic_selected_newspaper.png'
+                                  : 'assets/icons/ic_newspaper.png',
                               iconColor: pageIndex == 4
                                   ? Theme.of(context).primaryColor
                                   : AppColors.gray,

@@ -48,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   Future<void> _filterBodyHtmlData() async {
     final response = await http.get(Uri.parse(widget.description));
-    var document = html_parser.parse(response.body);
+    final document = html_parser.parse(response.body);
     setState(() {
       dataBody = document
           .getElementsByClassName('wd-content-detail')
@@ -59,8 +59,8 @@ class _DetailsPageState extends State<DetailsPage> {
 
   Future<void> _filterTimeHtmlData() async {
     final response = await http.get(Uri.parse(
-        'http://due.udn.vn/vi-vn/thongbao/thongbaochitiet/id/16933/bid/456'));
-    var document = html_parser.parse(response.body);
+        'http://due.udn.vn/vi-vn/thongbao/thongbaochitiet/id/16933/bid/456',),);
+    final document = html_parser.parse(response.body);
     setState(() {
       time = document
           .getElementsByClassName('wd-date')
@@ -71,8 +71,8 @@ class _DetailsPageState extends State<DetailsPage> {
 
   Future<void> _filterTitleHtmlData() async {
     final response = await http.get(Uri.parse(
-        'http://due.udn.vn/vi-vn/thongbao/thongbaochitiet/id/16933/bid/456'));
-    var document = html_parser.parse(response.body);
+        'http://due.udn.vn/vi-vn/thongbao/thongbaochitiet/id/16933/bid/456',),);
+    final document = html_parser.parse(response.body);
     setState(() {
       dataTitle =
           document.getElementsByTagName('h2').map((e) => e.innerHtml).toList();
@@ -113,7 +113,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       }
                       return null;
                     },
-                    dataBody[index],
+                    '<p><strong style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Kính gửi Quý Thầy/Cô.</strong></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Hội thảo Quốc gia về Kế toán - Kiểm toán năm 2023 (VCAA2023) là Hội thảo thường niên được tổ chức luân phiên tại các trường Đại học nhằm mở ra diễn đàn để chia sẻ, trao đổi kinh nghiệm cũng như quan điểm trong việc đổi mới đào tạo, nghiên cứu về kế toán, kiểm toán tại các cơ sở đào tạo ở Việt Nam.&nbsp;</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Chủ đề của Hội thảo năm 2023 là&nbsp;</span><strong style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">"Kế toán - Kiểm toán trong nền Kinh tế số và Hội nhập quốc tế"</strong><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">. Nhà trường trân trọng kính mời quý Thầy/Cô tham gia viết bài cho Hội thảo nói trên, nội dung cụ thể như sau:</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Thời gian tổ chức: 07/10/2023 (Thứ Bảy)</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Địa điểm: Trường Đại học Công nghiệp Hà Nội</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Thời gian nhận bài: trước ngày 30/08/2023</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Email nhận bài:&nbsp;</span><a href="mailto:vcaa2023@haui.edu.vn" rel="noopener noreferrer" target="_blank" style="background-color: initial; color: rgb(17, 85, 204);">vcaa2023@haui.edu.vn</a></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Liên hệ Hội thảo:</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">- PGS.TS. Đặng Ngọc Hùng (Ban Tổ chức) 0983981845</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">- TS. Nguyễn Thị Xuân Hồng (Ban Thư ký Hội thảo) 0988010980</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">- ThS. Nguyễn Thị Liên (Ban Thư ký Hội thảo) 0972639510</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Trân trọng./.</span></p><p><span style="color: rgb(34, 34, 34); background-color: rgb(255, 255, 255);">Phòng KH&amp;HTQT.</span></p><p><br></p>',
                     onTapUrl: (p0) async {
                       if (await canLaunchUrl(Uri.parse(p0))) {
                         return launchUrl(

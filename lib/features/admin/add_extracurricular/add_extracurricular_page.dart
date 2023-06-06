@@ -131,7 +131,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          StringManager.captionAdmin,
+          StringManager.captionAdminExtracurricularActivity,
           textAlign: TextAlign.center,
           style: SafeGoogleFont(
             StringManager.mulish,
@@ -260,8 +260,8 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
         child: ElevatedButton.icon(
           onPressed: _saveData,
           icon: const Icon(Icons.save),
-          label: const Text('Save'),
-        ));
+          label: const Text('Lưu điểm hoạt động'),
+        ),);
   }
 
   Future<void> _saveData() async {
@@ -301,7 +301,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
         _snackBar(StringManager.reportAdmin7);
         return;
       }
-      var documentReference = FirebaseFirestore.instance
+      final documentReference = FirebaseFirestore.instance
           .collection('User')
           .doc(value[0].email)
           .collection('Extracurriculars');
