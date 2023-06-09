@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,12 +7,11 @@ import 'common/common.dart';
 import 'models/firebaseuser.dart';
 import 'services/auth_services.dart';
 import 'services/link_services.dart';
-import 'services/route_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: 'due-news',
+    name: kIsWeb ? null : 'due-news',
     options: const FirebaseOptions(
       apiKey: 'AIzaSyCkUoLoTJLKBATOri-o20FH0dUgZXZ_Z9k',
       authDomain: 'due-news.firebaseapp.com',
@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
         ),
         home: const SplashWidget(),
         navigatorKey: LinkService.navigatorKey,
-        onGenerateRoute: RouteServices.generateRoute,
       ),
     );
   }
