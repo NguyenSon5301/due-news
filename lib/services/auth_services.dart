@@ -26,10 +26,11 @@ class AuthService {
 
   Future signInEmailPassword(LoginUser login) async {
     try {
-      final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: login.email.toString(),
-              password: login.password.toString(),);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: login.email.toString(),
+        password: login.password.toString(),
+      );
       final user = userCredential.user;
       return _firebaseUser(user);
     } on FirebaseAuthException catch (e) {
@@ -39,10 +40,11 @@ class AuthService {
 
   Future registerEmailPassword(LoginUser login) async {
     try {
-      final userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: login.email.toString(),
-              password: login.password.toString(),);
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: login.email.toString(),
+        password: login.password.toString(),
+      );
       final user = userCredential.user;
       return _firebaseUser(user);
     } on FirebaseAuthException catch (e) {
