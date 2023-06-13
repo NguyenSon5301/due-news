@@ -9,7 +9,7 @@ import '../../utils/utils.dart';
 class HorizontalCategoryList extends StatefulWidget {
   final List<String> items;
 
-  const HorizontalCategoryList({Key? key, required this.items})
+  const HorizontalCategoryList({required this.items, Key? key})
       : super(key: key);
   @override
   State<HorizontalCategoryList> createState() => _HorizontalCategoryListState();

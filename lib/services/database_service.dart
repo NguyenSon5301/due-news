@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/category_news.dart';
 import '../models/extracurricular.dart';
 import '../models/semester.dart';
 import '../models/user_information.dart';
@@ -83,6 +84,14 @@ class DatabaseService {
     return _db.collection('Extracurriculars').get().then(
           (value) => value.docs
               .map<Extracurricular>((e) => Extracurricular.fromJson(e.data()))
+              .toList(),
+        );
+  }
+
+  Future<List<CategoryNews>> getCategoryNewsList() async {
+    return _db.collection('Categories').get().then(
+          (value) => value.docs
+              .map<CategoryNews>((e) => CategoryNews.fromJson(e.data()))
               .toList(),
         );
   }

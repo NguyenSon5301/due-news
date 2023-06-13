@@ -38,7 +38,6 @@ class StringManager {
   static const password = 'Mật khẩu';
   static const idStudent = 'ID sinh viên';
 
-
   /* Tabbar */
   static const titleInformationPage = 'Trang thông tin';
   static const titleNewsPage = 'Tin tức';
@@ -57,7 +56,9 @@ class StringManager {
   static const titleSavePage = 'CÁC TIN TỨC ĐÃ ĐƯỢC LƯU';
 
   /* admin */
-  static const captionAdmin = 'NHẬP THÔNG TIN ĐIỂM HOẠT ĐỘNG NGOẠI KHÓA';
+  static const captionAdminExtracurricularActivity =
+      'NHẬP THÔNG TIN ĐIỂM HOẠT ĐỘNG NGOẠI KHÓA';
+  static const captionAdminNews = 'NHẬP THÔNG TIN CỦA TIN TỨC';
   static const semesterAdmin = 'Học kỳ:';
   static const selectSemester = 'Chọn học kỳ';
   static const nameActivityAdmin = 'Tên hoạt động:';
@@ -74,6 +75,19 @@ class StringManager {
   static const reportAdmin6 = 'Không tìm thấy học viên !!!';
   static const reportAdmin7 = 'Không tìm thấy tên hoạt động !!!';
   static const reportAdmin8 = 'Điểm ngoại khóa đã được thêm';
+
+  static const titleNews = 'Tiêu đề bài tin tức';
+  static const idNews = 'ID tin tức';
+  static const categoryNews = 'Mục lục';
+  static const descriptionNews = 'Nội dung bài báo';
+  static const pubLishedDate = 'Ngày phát hành';
+  static const typeTitleNews = 'Nhập tiêu đề';
+  static const typeCategoryNews = 'Chọn mục lục';
+  static const typeDescriptionNews = 'Nhập nội dung bài báo';
+  static const requestTypeTitleNews = 'Vui lòng nhập tiêu đề!!!';
+  static const requestTypeDescription = 'Vui lòng nhập nội dung!!!';
+  static const requestSelectCategory = 'Vui lòng chọn mục lục!!!';
+  static const addNewsSuccess = 'Bài báo đã được thêm';
 
   /* common */
   static const no = 'Không';

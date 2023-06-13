@@ -48,14 +48,14 @@ class _ScorePageState extends State<ScorePage>
   String? selectedValue;
 
   List<DropdownMenuItem<String>> _addDividersAfterItems(List<String> items) {
-    final _menuItems = <DropdownMenuItem<String>>[];
-    for (var item in items) {
-      _menuItems.addAll(
+    final menuItems = <DropdownMenuItem<String>>[];
+    for (final item in items) {
+      menuItems.addAll(
         [
           DropdownMenuItem<String>(
             value: item,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 item,
                 style: const TextStyle(
@@ -73,20 +73,20 @@ class _ScorePageState extends State<ScorePage>
         ],
       );
     }
-    return _menuItems;
+    return menuItems;
   }
 
   List<double> _getCustomItemsHeights() {
-    final _itemsHeights = <double>[];
+    final itemsHeights = <double>[];
     for (var i = 0; i < (items.length * 2) - 1; i++) {
       if (i.isEven) {
-        _itemsHeights.add(40);
+        itemsHeights.add(40);
       }
       if (i.isOdd) {
-        _itemsHeights.add(4);
+        itemsHeights.add(4);
       }
     }
-    return _itemsHeights;
+    return itemsHeights;
   }
 
   @override
@@ -177,8 +177,8 @@ class _ScorePageState extends State<ScorePage>
       stream: db.getInformation(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          var DocData = snapshot.data;
-          Timestamp t = DocData['birthDate'];
+          final DocData = snapshot.data;
+          final Timestamp t = DocData['birthDate'];
           final d = t.toDate();
           final data = UserInfomation(
             birthDate: d,
@@ -392,7 +392,7 @@ class _ScorePageState extends State<ScorePage>
                       ),
                       menuItemStyleData: MenuItemStyleData(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
+                          horizontal: 8,
                         ),
                         customHeights: _getCustomItemsHeights(),
                       ),
@@ -839,7 +839,7 @@ class _ScorePageState extends State<ScorePage>
   }
 
   int _totalExtracurricularScores(List<Extracurricular> scores) {
-    var total = 0;
+    const total = 0;
     var totalCategory1 = 0;
     var totalCategory2 = 0;
     var totalCategory3 = 0;

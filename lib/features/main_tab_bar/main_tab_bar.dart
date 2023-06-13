@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class _MainTabBarState extends State<MainTabBar> {
     const NewsCollectionPage(),
     const AddExtracurricularPage(),
     const AddNewsPage(),
-    SamplePage(
+    const SamplePage(
       title: StringManager.titleInformationPage,
     ),
   ];
@@ -83,7 +84,7 @@ class _MainTabBarState extends State<MainTabBar> {
                   stream: db.getInformation(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      var DocData = snapshot.data;
+                      final DocData = snapshot.data;
                       return Row(
                         children: [
                           if (DocData['role'].contains('user')) ...[
@@ -111,7 +112,10 @@ class _MainTabBarState extends State<MainTabBar> {
                               iconColor: pageIndex == 2
                                   ? Theme.of(context).primaryColor
                                   : AppColors.gray,
-                              tap: () {
+                              tap: () async {
+                                final fcmToken =
+                                    await FirebaseMessaging.instance.getToken();
+                                print(fcmToken);
                                 setState(() {
                                   pageIndex = 2;
                                 });
@@ -141,8 +145,8 @@ class _MainTabBarState extends State<MainTabBar> {
                               isSelect: pageIndex == 4,
                               title: StringManager.addNewsTitle,
                               iconName: pageIndex == 4
-                                  ? Assets.icons.icSelectedArchive.path
-                                  : Assets.icons.icUnselectedArchive.path,
+                                  ? 'assets/icons/ic_selected_newspaper.png'
+                                  : 'assets/icons/ic_newspaper.png',
                               iconColor: pageIndex == 4
                                   ? Theme.of(context).primaryColor
                                   : AppColors.gray,

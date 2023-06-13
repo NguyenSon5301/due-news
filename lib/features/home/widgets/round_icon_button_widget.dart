@@ -26,7 +26,7 @@ class RoundIconButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(
             color: AppColors.borderColor,

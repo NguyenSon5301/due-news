@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:number_paginator/number_paginator.dart';
 import 'package:intl/intl.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 import '../../common/common.dart';
 import '../../common/constants/constant.dart';
@@ -24,7 +24,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage>
     with AutomaticKeepAliveClientMixin<NewsCollectionPage> {
   int currentPage = 0;
   DatabaseService db = DatabaseService();
-  var listNews = <String>[];
+  List<String> listNews = <String>[];
   @override
   bool get wantKeepAlive => true;
   @override
@@ -86,7 +86,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage>
                                     }
                                     final dateOnly = DateFormat('dd/MM/yyyy')
                                         .format(
-                                            data[currentIndex].publishedDate!);
+                                            data[currentIndex].publishedDate!,);
                                     return CardViewWidget(
                                       // data[index].reference.id
                                       titleNews: data[currentIndex].titleNews,
@@ -111,7 +111,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage>
                                   },
                                 ),
                               ),
-                              if (data.length != 0)
+                              if (data.isNotEmpty)
                                 NumberPaginator(
                                   numberPages: (data.length / 5.0) >
                                           (data.length / 5.0).round()

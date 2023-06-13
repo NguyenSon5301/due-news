@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../common/colors/app_color.dart';
 import '../../../common/common.dart';
 import '../../../models/loginuser.dart';
 import '../../../services/auth_services.dart';
 import '../../main_tab_bar/main_tab_bar.dart';
-import '../login/login_page.dart';
 
 class Register extends StatefulWidget {
   final Function? toggleView;
@@ -38,12 +35,10 @@ class _Register extends State<Register> {
         if (value == null || value.trim().isEmpty) {
           return 'Yêu cầu nhập';
         }
-        if (value != null) {
-          if (value.contains('@') && value.endsWith('.com')) {
-            return null;
-          }
-          return 'Nhập 1 email đúng kiểu';
+        if (value.contains('@') && value.endsWith('.com')) {
+          return null;
         }
+        return 'Nhập 1 email đúng kiểu';
         return null;
       },
       decoration: InputDecoration(
@@ -138,7 +133,7 @@ class _Register extends State<Register> {
       color: AppColors.blueLight,
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
-          dynamic result = await _auth.registerEmailPassword(
+          final dynamic result = await _auth.registerEmailPassword(
             LoginUser(email: _email.text, password: _password.text),
           );
           if (result.uid == null) {
@@ -180,11 +175,10 @@ class _Register extends State<Register> {
           await Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => MainTabBar(),
+              builder: (context) => const MainTabBar(),
             ),
           );
         }
-        ;
       },
     );
 
