@@ -38,7 +38,6 @@ class StringManager {
   static const password = 'Mật khẩu';
   static const idStudent = 'ID sinh viên';
 
-
   /* Tabbar */
   static const titleInformationPage = 'Trang thông tin';
   static const titleNewsPage = 'Tin tức';
@@ -88,8 +87,7 @@ class StringManager {
   static const requestTypeTitleNews = 'Vui lòng nhập tiêu đề!!!';
   static const requestTypeDescription = 'Vui lòng nhập nội dung!!!';
   static const requestSelectCategory = 'Vui lòng chọn mục lục!!!';
-  
-
+  static const addNewsSuccess = 'Bài báo đã được thêm';
 
   /* common */
   static const no = 'Không';

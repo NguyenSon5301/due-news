@@ -461,32 +461,22 @@ class _AddNewsPageState extends State<AddNewsPage>
                           vertical: 10,
                           horizontal: 20,
                         ),
-                        child: Flexible(
-                          fit: FlexFit.tight,
-                          child: QuillHtmlEditor(
-                            text:
-                                '<h1>Hello</h1>This is a quill html editor example 😊',
-                            hintText: 'Hint text goes here',
-                            controller: descriptionController,
-                            isEnabled: true,
-                            minHeight: 500,
-                            textStyle: _editorTextStyle,
-                            hintTextStyle: _hintTextStyle,
-                            hintTextAlign: TextAlign.start,
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                              top: 10,
-                            ),
-                            hintTextPadding: const EdgeInsets.only(
-                              left: 20,
-                            ),
-                            backgroundColor: _backgroundColor,
-                            onEditorCreated: () {
-                              setHtmlText(
-                                StringManager.typeDescriptionNews,
-                              );
-                            },
+                        child: QuillHtmlEditor(
+                          hintText: 'Viết nội dung báo cáo',
+                          controller: descriptionController,
+                          isEnabled: true,
+                          minHeight: 500,
+                          textStyle: _editorTextStyle,
+                          hintTextStyle: _hintTextStyle,
+                          hintTextAlign: TextAlign.start,
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            top: 10,
                           ),
+                          hintTextPadding: const EdgeInsets.only(
+                            left: 20,
+                          ),
+                          backgroundColor: _backgroundColor,
                         ),
                       ),
                     ),
@@ -539,7 +529,7 @@ class _AddNewsPageState extends State<AddNewsPage>
       await documentReference.set(add).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text(StringManager.reportAdmin8),
+            content: Text(StringManager.addNewsSuccess),
           ),
         );
         setState(() {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -111,7 +112,10 @@ class _MainTabBarState extends State<MainTabBar> {
                               iconColor: pageIndex == 2
                                   ? Theme.of(context).primaryColor
                                   : AppColors.gray,
-                              tap: () {
+                              tap: () async {
+                                final fcmToken =
+                                    await FirebaseMessaging.instance.getToken();
+                                print(fcmToken);
                                 setState(() {
                                   pageIndex = 2;
                                 });
