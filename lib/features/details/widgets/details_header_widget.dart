@@ -91,8 +91,7 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
               ],
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
               child: Row(
                 children: [
                   Expanded(
@@ -124,69 +123,65 @@ class _DetailsHeaderWidgetState extends State<DetailsHeaderWidget> {
                   ),
                   if (user != null)
                     StreamBuilder<DocumentSnapshot>(
-                        stream: db.getInformation(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData) {
-                            final DocData = snapshot.data;
-                            final documentReference = FirebaseFirestore.instance
-                                .collection('User')
-                                .doc(
-                                  FirebaseAuth.instance.currentUser!.email
-                                      .toString(),
-                                );
+                      stream: db.getInformation(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          final DocData = snapshot.data;
+                          final documentReference =
+                              FirebaseFirestore.instance.collection('User').doc(
+                                    UserInfoManager.ins.idStudent,
+                                  );
 
-                            final newsList = <String>[
-                              ...DocData['newsCollection']
-                            ];
-                            var index = -1;
-                            final news = widget.idPost;
-                            for (var i = 0; i < newsList.length; i++) {
-                              if (newsList[i] == news) {
-                                index = i;
-                              }
+                          final newsList = <String>[
+                            ...DocData['newsCollection']
+                          ];
+                          var index = -1;
+                          final news = widget.idPost;
+                          for (var i = 0; i < newsList.length; i++) {
+                            if (newsList[i] == news) {
+                              index = i;
                             }
-                            return RoundIconButtonWidget(
-                              iconName: index == -1
-                                  ? Assets.icons.icArchiveAdd.path
-                                  : Assets.icons.icSelectedArchive.path,
-                              iconColor: AppColors.backGroundColor,
-                              iconWidth: 20,
-                              iconHeight: 20,
-                              borderColor: AppColors.borderColor,
-                              onTap: () async {
-                                if (index > -1) {
-                                  newsList.removeAt(index);
-                                } else {
-                                  newsList.add(news);
-                                }
-                                final add = <String, dynamic>{
-                                  'newsCollection': newsList,
-                                };
-                                await documentReference
-                                    .update(add)
-                                    .then((value) {
-                                  if (index > -1) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content:
-                                            Text(StringManager.removeSaveNews),
-                                      ),
-                                    );
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(StringManager.saveNews),
-                                      ),
-                                    );
-                                  }
-                                });
-                              },
-                            );
-                          } else {
-                            return const CircularProgressIndicator();
                           }
-                        },)
+                          return RoundIconButtonWidget(
+                            iconName: index == -1
+                                ? Assets.icons.icArchiveAdd.path
+                                : Assets.icons.icSelectedArchive.path,
+                            iconColor: AppColors.backGroundColor,
+                            iconWidth: 20,
+                            iconHeight: 20,
+                            borderColor: AppColors.borderColor,
+                            onTap: () async {
+                              if (index > -1) {
+                                newsList.removeAt(index);
+                              } else {
+                                newsList.add(news);
+                              }
+                              final add = <String, dynamic>{
+                                'newsCollection': newsList,
+                              };
+                              await documentReference.update(add).then((value) {
+                                if (index > -1) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text(StringManager.removeSaveNews),
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(StringManager.saveNews),
+                                    ),
+                                  );
+                                }
+                              });
+                            },
+                          );
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      },
+                    )
                 ],
               ),
             )

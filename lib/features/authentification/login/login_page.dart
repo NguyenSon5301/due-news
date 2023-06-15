@@ -6,6 +6,7 @@ import '../../../common/background.dart';
 import '../../../common/button.dart';
 import '../../../common/colors/app_color.dart';
 import '../../../common/constants/constant.dart';
+import '../../../common/singleton/user_singleton.dart';
 import '../../../models/loginuser.dart';
 import '../../../services/auth_services.dart';
 import '../../main_tab_bar/main_tab_bar.dart';
@@ -24,7 +25,7 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
   bool _obscureText = true;
 
-  final _email = TextEditingController();
+  final _idStudent = TextEditingController();
   final _password = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
@@ -32,7 +33,7 @@ class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final emailField = TextFormField(
-      controller: _email,
+      controller: _idStudent,
       autofocus: false,
       validator: (value) {
         return null;
@@ -77,112 +78,105 @@ class _Login extends State<Login> {
       ),
     );
 
-    final txtbutton = TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Register()),
-        );
-      },
-      child: const Text('Đăng ký tại đây'),
-    );
-
     final loginEmailPasswordButon = CustomButton(
-        buttonLabel: StringManager.login,
-        color: AppColors.blueLight,
-        onPressed: () async {
-          if (_formKey.currentState!.validate()) {
-            final QuerySnapshot snap = await FirebaseFirestore.instance
-                .collection('User')
-                .where('idStudent', isEqualTo: _email.text)
-                .get();
-            final dynamic result = await _auth.signInEmailPassword(
-              LoginUser(email: snap.docs[0]['email'], password: _password.text),
+      buttonLabel: StringManager.login,
+      color: AppColors.blueLight,
+      onPressed: () async {
+        if (_formKey.currentState!.validate()) {
+          final QuerySnapshot snap = await FirebaseFirestore.instance
+              .collection('User')
+              .where('idStudent', isEqualTo: _idStudent.text)
+              .get();
+          final dynamic result = await _auth.signInEmailPassword(
+            LoginUser(email: snap.docs[0]['email'], password: _password.text),
+          );
+          if (result.uid == null) {
+            await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text(result.code),
+                );
+              },
             );
-            if (result.uid == null) {
-              await showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    content: Text(result.code),
-                  );
-                },
-              );
-              return;
-            }
-            await Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MainTabBar(),
-              ),
-            );
+            return;
           }
-        },);
+          UserInfoManager.ins.idStudent = _idStudent.text;
+          await Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainTabBar(),
+            ),
+          );
+        }
+      },
+    );
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Background(
         child: SingleChildScrollView(
-            child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 50,
-                        bottom: 10,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              color: AppColors.blue,
-                              size: 30,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 50,
+                          bottom: 10,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                color: AppColors.blue,
+                                size: 30,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    LottieBuilder.asset(
-                      'assets/lottie/welcome_text.json',
-                      width: 400,
-                    ),
-                    const Text(
-                      StringManager.login,
-                      style: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        fontSize: 40,
-                        color: AppColors.blue,
+                      LottieBuilder.asset(
+                        'assets/lottie/welcome_text.json',
+                        width: 400,
                       ),
-                    ),
-                    _buildHeight(20),
-                    emailField,
-                    _buildHeight(30),
-                    passwordField,
-                    // txtbutton,
-                    _buildHeight(30),
-                    loginEmailPasswordButon,
-                    _buildHeight(300),
-                  ],
+                      const Text(
+                        StringManager.login,
+                        style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontSize: 40,
+                          color: AppColors.blue,
+                        ),
+                      ),
+                      _buildHeight(20),
+                      emailField,
+                      _buildHeight(30),
+                      passwordField,
+                      // txtbutton,
+                      _buildHeight(30),
+                      loginEmailPasswordButon,
+                      _buildHeight(300),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),),
+        ),
       ),
     );
   }
