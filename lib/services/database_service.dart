@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../common/common.dart';
 import '../models/category_news.dart';
 import '../models/extracurricular.dart';
 import '../models/semester.dart';
+import '../models/token_user.dart';
 import '../models/user_information.dart';
 
 class DatabaseService {
@@ -34,7 +36,7 @@ class DatabaseService {
   ) {
     return FirebaseFirestore.instance
         .collection('User')
-        .doc(user!.email)
+        .doc(UserInfoManager.ins.idStudent)
         .collection('Subjects')
         .where('semester', isEqualTo: semester)
         .orderBy(
@@ -46,7 +48,7 @@ class DatabaseService {
   Stream<QuerySnapshot<Object?>> getExtracurriculars() {
     return FirebaseFirestore.instance
         .collection('User')
-        .doc(user!.email)
+        .doc(UserInfoManager.ins.idStudent)
         .collection('Extracurriculars')
         .orderBy(
           'categoryScore',
@@ -57,14 +59,26 @@ class DatabaseService {
   Stream<DocumentSnapshot<Object?>> getInformation() {
     return FirebaseFirestore.instance
         .collection('User')
-        .doc(user!.email)
+        .doc(UserInfoManager.ins.idStudent)
         .snapshots();
+  }
+
+  Future<List<UserInfomation>> getIdStudent() async {
+    return _db
+        .collection('User')
+        .where('email', isEqualTo: user!.email)
+        .get()
+        .then(
+          (value) => value.docs
+              .map<UserInfomation>((e) => UserInfomation.fromJson(e.data()))
+              .toList(),
+        );
   }
 
   Stream<QuerySnapshot<Object?>> getAllScoresUser() {
     return FirebaseFirestore.instance
         .collection('User')
-        .doc(user!.email)
+        .doc(UserInfoManager.ins.idStudent)
         .collection('Subjects')
         .orderBy(
           'nameSubject',
@@ -96,6 +110,14 @@ class DatabaseService {
         );
   }
 
+  Future<List<TokenUser>> getTokenUser() async {
+    return _db.collection('UserTokens').get().then(
+          (value) => value.docs
+              .map<TokenUser>((e) => TokenUser.fromJson(e.data()))
+              .toList(),
+        );
+  }
+
   Future<List<UserInfomation>> getUserList(String idStudent) async {
     return _db
         .collection('User')
@@ -109,20 +131,27 @@ class DatabaseService {
   }
 
   Future<List<String>> getListNewsCollection() async {
-    return _db.collection('User').doc(user!.email).get().then(
+    return _db.collection('User').doc(UserInfoManager.ins.idStudent).get().then(
           (value) => List.from(value.data()!['newsCollection']),
         );
   }
 
   Future<bool> updateInfo(String field, DateTime data) async {
-    final documentReference = FirebaseFirestore.instance.collection('User').doc(
-          FirebaseAuth.instance.currentUser!.email.toString(),
-        );
+    final documentReference = FirebaseFirestore.instance
+        .collection('User')
+        .doc(UserInfoManager.ins.idStudent);
 
     final add = <String, dynamic>{field: Timestamp.fromDate(data)};
     await documentReference.update(add).then((value) {
       return true;
     });
     return false;
+  }
+
+  Future<void> saveToken(String token) async {
+    await FirebaseFirestore.instance
+        .collection("UserTokens")
+        .doc(token)
+        .set({'token': token});
   }
 }

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:search_choices/search_choices.dart';
@@ -26,6 +30,7 @@ class _AddNewsPageState extends State<AddNewsPage>
   DateTime currentPickedDate = DateTime.now();
   int max = 0;
   List<DropdownMenuItem> listCategoryNews = [];
+  List<String> listUserToken = [];
   String selectedCategoryNews = StringManager.typeCategoryNews;
 
   late QuillEditorController descriptionController;
@@ -63,14 +68,28 @@ class _AddNewsPageState extends State<AddNewsPage>
   void initState() {
     super.initState();
     descriptionController = QuillEditorController();
-
     _loadInitCategoryNews();
+    _loadInitToken();
   }
 
   @override
   void dispose() {
     descriptionController.dispose();
     super.dispose();
+  }
+
+  void _loadInitToken() {
+    db.getTokenUser().then(
+          (value) => {
+            setState(() {
+              value
+                  .map(
+                    (e) => listUserToken.add(e.tokenUser),
+                  )
+                  .toList();
+            })
+          },
+        );
   }
 
   void _loadInitCategoryNews() {
@@ -532,13 +551,50 @@ class _AddNewsPageState extends State<AddNewsPage>
             content: Text(StringManager.addNewsSuccess),
           ),
         );
+        sendPushMessage(listUserToken, _titleField.text, (max).toString());
         setState(() {
           _titleField.text = '';
           currentPickedDate = DateTime.now();
           selectedCategoryNews = StringManager.typeCategoryNews;
-          descriptionController.setText(StringManager.typeDescriptionNews);
+          descriptionController.setText('');
         });
       });
+    }
+  }
+
+  Future<void> sendPushMessage(
+    List<String> token,
+    String body,
+    String idPost,
+  ) async {
+    try {
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization':
+              'key=AAAAifOwvCI:APA91bFmt3KjTurdvyfCqf_G5d3H3ZMkxr2dgCRvSS8U8JI11izq2qxkWk_Gg0DgjTFcqzKfUiPkDFtLco43tokfe3u_Bp2Ktyrw3p_p3e6QwyNrS2tjnSjmEp6HulmRWG_SHJPf0lqc',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'priority': 'high',
+          'data': <String, dynamic>{
+            'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+            'status': 'done',
+            'idPost': idPost,
+          },
+          'notification': <String, dynamic>{
+            'body': body,
+            'title': 'DUE News: Có một tin tức mới',
+            'android_channel_id': 'due-news'
+          },
+          'registration_ids': token,
+        }),
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print('Loi la gi $e');
+      }
+      _snackBar(e.toString());
     }
   }
 

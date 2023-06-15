@@ -148,7 +148,6 @@ class _HomePageState extends State<HomePage>
                               final dateOnly = DateFormat('dd/MM/yyyy')
                                   .format(data[currentIndex].publishedDate!);
                               return CardViewWidget(
-                                // data[index].reference.id
                                 titleNews: data[currentIndex].titleNews,
                                 publishedDate: dateOnly,
                                 onTap: () {
@@ -179,6 +178,8 @@ class _HomePageState extends State<HomePage>
                           ],
                           if (data.isNotEmpty)
                             NumberPaginator(
+                              config: const NumberPaginatorUIConfig(
+                                  mode: ContentDisplayMode.numbers, height: 40),
                               initialPage: currentPage,
                               numberPages: (data.length / 5.0) >
                                       (data.length / 5.0).round()

@@ -181,6 +181,7 @@ class _ScorePageState extends State<ScorePage>
           final Timestamp t = DocData['birthDate'];
           final d = t.toDate();
           final data = UserInfomation(
+            idStudent: DocData['idStudent'],
             birthDate: d,
             name: DocData['name'],
             classRoom: DocData['class'],

@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ void main() async {
       measurementId: 'G-V9R6FL3702',
     ),
   );
+  await FirebaseMessaging.instance.getInitialMessage();
   runApp(const MyApp());
 }
 

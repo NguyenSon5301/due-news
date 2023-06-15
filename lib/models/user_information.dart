@@ -1,4 +1,5 @@
 class UserInfomation {
+  String idStudent;
   String name;
   DateTime? birthDate;
   String classRoom;
@@ -7,6 +8,7 @@ class UserInfomation {
   String major;
   String email;
   UserInfomation({
+    required this.idStudent,
     required this.name,
     required this.birthDate,
     required this.classRoom,
@@ -17,10 +19,12 @@ class UserInfomation {
   });
   factory UserInfomation.fromJson(Map<String, dynamic> json) {
     return UserInfomation(
+      idStudent: json['idStudent'] ?? '',
       name: json['iDSubject'] ?? '',
       birthDate: json['birthDate'] != null
           ? DateTime.fromMillisecondsSinceEpoch(
-              json['birthDate'].millisecondsSinceEpoch,)
+              json['birthDate'].millisecondsSinceEpoch,
+            )
           : null,
       classRoom: json['classRoom'] ?? '',
       level: json['level'] ?? '',

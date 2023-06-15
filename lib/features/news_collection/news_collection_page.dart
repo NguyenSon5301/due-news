@@ -84,9 +84,10 @@ class _NewsCollectionPageState extends State<NewsCollectionPage>
                                     if (currentIndex + 1 > data.length) {
                                       return const SizedBox();
                                     }
-                                    final dateOnly = DateFormat('dd/MM/yyyy')
-                                        .format(
-                                            data[currentIndex].publishedDate!,);
+                                    final dateOnly =
+                                        DateFormat('dd/MM/yyyy').format(
+                                      data[currentIndex].publishedDate!,
+                                    );
                                     return CardViewWidget(
                                       // data[index].reference.id
                                       titleNews: data[currentIndex].titleNews,

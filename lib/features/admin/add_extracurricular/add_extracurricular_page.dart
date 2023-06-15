@@ -255,13 +255,14 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
 
   Widget _buttonSave() {
     return SizedBox(
-        height: 50,
-        width: 200,
-        child: ElevatedButton.icon(
-          onPressed: _saveData,
-          icon: const Icon(Icons.save),
-          label: const Text('Lưu điểm hoạt động'),
-        ),);
+      height: 50,
+      width: 200,
+      child: ElevatedButton.icon(
+        onPressed: _saveData,
+        icon: const Icon(Icons.save),
+        label: const Text('Lưu điểm hoạt động'),
+      ),
+    );
   }
 
   Future<void> _saveData() async {
@@ -303,7 +304,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       }
       final documentReference = FirebaseFirestore.instance
           .collection('User')
-          .doc(value[0].email)
+          .doc(_idStudentField.text)
           .collection('Extracurriculars');
       final add = <String, dynamic>{
         'categoryScore': listCategoryScore[index].categoryScore,
