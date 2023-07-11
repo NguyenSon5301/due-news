@@ -5,6 +5,7 @@ import '../common/common.dart';
 import '../models/category_news.dart';
 import '../models/extracurricular.dart';
 import '../models/semester.dart';
+import '../models/subject.dart';
 import '../models/token_user.dart';
 import '../models/user_information.dart';
 
@@ -98,6 +99,14 @@ class DatabaseService {
     return _db.collection('Extracurriculars').get().then(
           (value) => value.docs
               .map<Extracurricular>((e) => Extracurricular.fromJson(e.data()))
+              .toList(),
+        );
+  }
+
+  Future<List<Subject>> getSubjectList() async {
+    return _db.collection('Subjects').get().then(
+          (value) => value.docs
+              .map<Subject>((e) => Subject.fromJson(e.data()))
               .toList(),
         );
   }

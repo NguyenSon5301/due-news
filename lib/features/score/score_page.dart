@@ -616,7 +616,7 @@ class _ScorePageState extends State<ScorePage>
                                 horizontal: 15,
                               ),
                               child: Text(
-                                _averageSemesterScores(data).toString(),
+                                _averageSemesterScores(data).toStringAsFixed(2),
                                 style: SafeGoogleFont(
                                   StringManager.mulish,
                                   fontSize: 12,
@@ -645,7 +645,7 @@ class _ScorePageState extends State<ScorePage>
   Widget _tableExtracurricular() {
     return SizedBox(
       width: 1000,
-      height: 500,
+      height: 10000,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

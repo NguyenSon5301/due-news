@@ -63,18 +63,24 @@ class StringManager {
   static const selectSemester = 'Chọn học kỳ';
   static const nameActivityAdmin = 'Tên hoạt động:';
   static const selectNameActivity = 'Chọn tên hoạt động';
+  static const selectNameSubject = 'Chọn tên học phần';
   static const scoreAdmin = 'Điểm:';
   static const typeScoreAdmin = 'Nhập điểm';
   static const idStudentAdmin = 'ID sinh viên:';
   static const typeIDStudent = 'Nhập ID';
-  static const reportAdmin1 = 'Vui lòng chọn học kỳ !!!';
-  static const reportAdmin2 = 'Vui lòng chọn tên hoạt động !!!';
-  static const reportAdmin3 = 'Vui lòng điền điểm !!!';
-  static const reportAdmin4 = 'Vui lòng điền điểm dạng số !!!';
-  static const reportAdmin5 = 'Vui lòng điền ID học viên !!!';
-  static const reportAdmin6 = 'Không tìm thấy học viên !!!';
-  static const reportAdmin7 = 'Không tìm thấy tên hoạt động !!!';
-  static const reportAdmin8 = 'Điểm ngoại khóa đã được thêm';
+  static const selectSemesterPls = 'Vui lòng chọn học kỳ !!!';
+  static const typeActivityPls = 'Vui lòng chọn tên hoạt động !!!';
+  static const selectSubjectPls = 'Vui lòng chọn tên học phần !!!';
+  static const typeScorePls = 'Vui lòng điền điểm !!!';
+  static const typeScoreRightPls = 'Vui lòng điền điểm hợp lệ !!!';
+  static const typeScoreNumberPls = 'Vui lòng điền điểm dạng số !!!';
+  static const typeIDStudnetPls = 'Vui lòng điền ID sinh viên dạng số !!!';
+  static const typeIDStudentPls = 'Vui lòng điền ID học viên !!!';
+  static const idStudentNotFound = 'Không tìm thấy học viên !!!';
+  static const activityNotFound = 'Không tìm thấy tên hoạt động !!!';
+  static const subjectNotFound = 'Không tìm thấy tên học phần !!!';
+  static const addActivitySuccessfully = 'Điểm ngoại khóa đã được thêm';
+  static const addSubjectSuccessfully = 'Điểm học phần đã được thêm';
 
   static const titleNews = 'Tiêu đề bài tin tức';
   static const idNews = 'ID tin tức';
@@ -89,6 +95,13 @@ class StringManager {
   static const requestSelectCategory = 'Vui lòng chọn mục lục!!!';
   static const addNewsSuccess = 'Bài báo đã được thêm';
 
+  /* Add Subject Score */
+  static const addSubjectScoreTitle = 'Thêm điểm học phần';
+  static const idSubject = 'Mã học phần';
+  static const note = 'Ghi chú';
+  static const score1 = 'Điểm thành phần 1';
+  static const score2 = 'Điểm thành phần 2';
+  static const score3 = 'Điểm thành phần 3';
   /* common */
   static const no = 'Không';
   static const confirm = 'Xác nhận';

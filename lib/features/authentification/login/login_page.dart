@@ -87,27 +87,39 @@ class _Login extends State<Login> {
               .collection('User')
               .where('idStudent', isEqualTo: _idStudent.text)
               .get();
-          final dynamic result = await _auth.signInEmailPassword(
-            LoginUser(email: snap.docs[0]['email'], password: _password.text),
-          );
-          if (result.uid == null) {
+          if (snap.docs[0]['email'] != null) {
+            final dynamic result = await _auth.signInEmailPassword(
+              LoginUser(email: snap.docs[0]['email'], password: _password.text),
+            );
+            if (result.uid == null) {
+              await showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text(result.code),
+                  );
+                },
+              );
+              return;
+            }
+            UserInfoManager.ins.idStudent = _idStudent.text;
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MainTabBar(),
+              ),
+            );
+          } else {
             await showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  content: Text(result.code),
+                  content: Text('Tài khoản sai!!!'),
                 );
               },
             );
             return;
           }
-          UserInfoManager.ins.idStudent = _idStudent.text;
-          await Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const MainTabBar(),
-            ),
-          );
         }
       },
     );

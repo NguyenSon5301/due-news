@@ -5,31 +5,36 @@ import 'package:search_choices/search_choices.dart';
 import '../../../common/common.dart';
 import '../../../common/constants/constant.dart';
 import '../../../models/extracurricular.dart';
+import '../../../models/subject.dart';
 import '../../../services/database_service.dart';
 import '../../utils/utils.dart';
 
-class AddExtracurricularPage extends StatefulWidget {
-  const AddExtracurricularPage({
+class AddSubjectScorePage extends StatefulWidget {
+  const AddSubjectScorePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddExtracurricularPage> createState() => _AddExtracurricularPageState();
+  State<AddSubjectScorePage> createState() => _AddSubjectScorePageState();
 }
 
-class _AddExtracurricularPageState extends State<AddExtracurricularPage>
-    with AutomaticKeepAliveClientMixin<AddExtracurricularPage> {
+class _AddSubjectScorePageState extends State<AddSubjectScorePage>
+    with AutomaticKeepAliveClientMixin<AddSubjectScorePage> {
   int currentPage = 0;
   DatabaseService db = DatabaseService();
   List<DropdownMenuItem> listSemester = [];
-  List<DropdownMenuItem> listNameActivity = [];
-  List<Extracurricular> listCategoryScore = [];
+  List<DropdownMenuItem> listNameSubject = [];
+  List<Subject> listCreditScore = [];
 
-  final TextEditingController _scoreField = TextEditingController();
+  final TextEditingController _score1Field = TextEditingController();
+  final TextEditingController _score2Field = TextEditingController();
+  final TextEditingController _score3Field = TextEditingController();
+  final TextEditingController _noteField = TextEditingController();
+
   final TextEditingController _idStudentField = TextEditingController();
 
   String selectedSemester = StringManager.selectSemester;
-  String selectedActivity = StringManager.selectNameActivity;
+  String selectedSubject = StringManager.selectNameSubject;
   @override
   bool get wantKeepAlive => true;
   @override
@@ -64,19 +69,19 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
   }
 
   void _loadInitActivity() {
-    db.getExtracurricularList().then(
+    db.getSubjectList().then(
           (value) => {
             setState(() {
               value.map((e) {
-                listNameActivity.add(
+                listNameSubject.add(
                   DropdownMenuItem(
-                    value: e.nameActivity,
+                    value: e.nameSubject,
                     child: Text(
-                      e.nameActivity,
+                      e.nameSubject,
                     ),
                   ),
                 );
-                listCategoryScore.add(e);
+                listCreditScore.add(e);
               }).toList();
             })
           },
@@ -103,15 +108,22 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
                     _sizedBox(50),
                     _header(),
                     _sizedBox(20),
+                    _idStudent(),
+                    _sizedBox(20),
                     _semesterRow(),
                     _sizedBox(20),
-                    _nameActivityRow(),
+                    _nameSubjectRow(),
                     _sizedBox(20),
-                    _scoreRow(),
+                    _score1Row(),
                     _sizedBox(20),
-                    _idStudent(),
+                    _score2Row(),
+                    _sizedBox(20),
+                    _score3Row(),
+                    _sizedBox(20),
+                    _noteRow(),
                     _sizedBox(30),
                     _buttonSave(),
+                    _sizedBox(50),
                   ],
                 ),
               ),
@@ -131,7 +143,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          StringManager.captionAdminExtracurricularActivity,
+          StringManager.addSubjectScoreTitle,
           textAlign: TextAlign.center,
           style: SafeGoogleFont(
             StringManager.mulish,
@@ -155,7 +167,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
           child: Text(StringManager.semesterAdmin),
         ),
         SizedBox(
-          width: 200,
+          width: 300,
           child: SearchChoices.single(
             items: listSemester,
             value: selectedSemester,
@@ -173,25 +185,25 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
     );
   }
 
-  Widget _nameActivityRow() {
+  Widget _nameSubjectRow() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(
           width: 120,
-          child: Text(StringManager.nameActivityAdmin),
+          child: Text('${StringManager.subject}:'),
         ),
         SizedBox(
-          width: 200,
+          width: 300,
           child: SearchChoices.single(
-            items: listNameActivity,
-            value: selectedActivity,
-            hint: StringManager.selectNameActivity,
-            searchHint: StringManager.selectNameActivity,
+            items: listNameSubject,
+            value: selectedSubject,
+            hint: StringManager.selectNameSubject,
+            searchHint: StringManager.selectNameSubject,
             onChanged: (value) {
               setState(() {
-                selectedActivity = value;
+                selectedSubject = value;
               });
             },
             isExpanded: true,
@@ -201,21 +213,101 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
     );
   }
 
-  Widget _scoreRow() {
+  Widget _score1Row() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(
           width: 120,
-          child: Text(StringManager.scoreAdmin),
+          child: Text('${StringManager.typeScoreAdmin} 1:'),
         ),
         SizedBox(
-          width: 200,
+          width: 300,
           child: TextFormField(
-            controller: _scoreField,
+            controller: _score1Field,
             decoration: const InputDecoration(
               labelText: StringManager.typeScoreAdmin,
+              border: OutlineInputBorder(),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 5),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _score2Row() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          width: 120,
+          child: Text('${StringManager.typeScoreAdmin} 2:'),
+        ),
+        SizedBox(
+          width: 300,
+          child: TextFormField(
+            controller: _score2Field,
+            decoration: const InputDecoration(
+              labelText: StringManager.typeScoreAdmin,
+              border: OutlineInputBorder(),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 5),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _score3Row() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          width: 120,
+          child: Text('${StringManager.typeScoreAdmin} 3:'),
+        ),
+        SizedBox(
+          width: 300,
+          child: TextFormField(
+            controller: _score3Field,
+            decoration: const InputDecoration(
+              labelText: StringManager.typeScoreAdmin,
+              border: OutlineInputBorder(),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 5),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _noteRow() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          width: 120,
+          child: Text('${StringManager.note}:'),
+        ),
+        SizedBox(
+          width: 300,
+          child: TextFormField(
+            keyboardType: TextInputType.multiline,
+            maxLines: 3,
+            controller: _noteField,
+            decoration: const InputDecoration(
+              labelText: StringManager.note,
               border: OutlineInputBorder(),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red, width: 5),
@@ -237,7 +329,7 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
           child: Text(StringManager.idStudentAdmin),
         ),
         SizedBox(
-          width: 200,
+          width: 300,
           child: TextFormField(
             controller: _idStudentField,
             decoration: const InputDecoration(
@@ -256,76 +348,114 @@ class _AddExtracurricularPageState extends State<AddExtracurricularPage>
   Widget _buttonSave() {
     return SizedBox(
       height: 50,
-      width: 200,
+      width: 300,
       child: ElevatedButton.icon(
         onPressed: _saveData,
         icon: const Icon(Icons.save),
-        label: const Text('Lưu điểm hoạt động'),
+        label: const Text('Lưu điểm học phần'),
       ),
     );
   }
 
   Future<void> _saveData() async {
-    if (selectedSemester.contains(StringManager.selectSemester)) {
-      _snackBar(StringManager.selectSemesterPls);
-      return;
-    }
-    if (selectedActivity.contains(StringManager.selectNameActivity)) {
-      _snackBar(StringManager.typeActivityPls);
-      return;
-    }
-    if (_scoreField.text.isEmpty) {
-      _snackBar(StringManager.typeScorePls);
-      return;
-    }
-    if (!isNumeric(_scoreField.text)) {
-      _snackBar(StringManager.typeScoreNumberPls);
-      return;
-    }
-    if (int.parse(_scoreField.text) < 0 && int.parse(_scoreField.text) > 100) {
-      _snackBar(StringManager.typeScoreRightPls);
-      return;
-    }
     if (_idStudentField.text.isEmpty) {
       _snackBar(StringManager.typeIDStudentPls);
       return;
     }
+    if (!isNumeric(_idStudentField.text)) {
+      _snackBar(StringManager.typeIDStudnetPls);
+      return;
+    }
+    if (selectedSemester.contains(StringManager.selectSemester)) {
+      _snackBar(StringManager.selectSemesterPls);
+      return;
+    }
+    if (selectedSubject.contains(StringManager.selectNameSubject)) {
+      _snackBar(StringManager.selectSubjectPls);
+      return;
+    }
+    if (_score1Field.text.isEmpty) {
+      _snackBar(StringManager.typeScorePls);
+      return;
+    }
+
+    if (!isNumeric(_score1Field.text)) {
+      _snackBar(StringManager.typeScoreNumberPls);
+      return;
+    }
+    if (int.parse(_score1Field.text) < 0 && int.parse(_score1Field.text) > 10) {
+      _snackBar(StringManager.typeScoreRightPls);
+      return;
+    }
+    if (_score2Field.text.isEmpty) {
+      _snackBar(StringManager.typeScorePls);
+      return;
+    }
+    if (!isNumeric(_score2Field.text)) {
+      _snackBar(StringManager.typeScoreNumberPls);
+      return;
+    }
+    if (int.parse(_score2Field.text) < 0 && int.parse(_score2Field.text) > 10) {
+      _snackBar(StringManager.typeScoreRightPls);
+      return;
+    }
+    if (_score3Field.text.isEmpty) {
+      _snackBar(StringManager.typeScorePls);
+      return;
+    }
+    if (!isNumeric(_score3Field.text)) {
+      _snackBar(StringManager.typeScoreNumberPls);
+      return;
+    }
+    if (int.parse(_score3Field.text) < 0 && int.parse(_score3Field.text) > 10) {
+      _snackBar(StringManager.typeScoreRightPls);
+      return;
+    }
+
     await db.getUserList(_idStudentField.text).then((value) async {
       if (value.isEmpty) {
         _snackBar(StringManager.idStudentNotFound);
         return;
       }
       var index = -1;
-      for (var i = 0; i < listNameActivity.length; i++) {
-        if (selectedActivity == listNameActivity[i].value) {
+      for (var i = 0; i < listNameSubject.length; i++) {
+        if (selectedSubject == listNameSubject[i].value) {
           index = i;
         }
       }
       if (index == -1) {
-        _snackBar(StringManager.activityNotFound);
+        _snackBar(StringManager.subjectNotFound);
         return;
       }
       final documentReference = FirebaseFirestore.instance
           .collection('User')
           .doc(_idStudentField.text)
-          .collection('Extracurriculars');
+          .collection('Subjects')
+          .doc(listCreditScore[index].idSubject);
       final add = <String, dynamic>{
-        'categoryScore': listCategoryScore[index].categoryScore,
-        'nameActivity': selectedActivity,
-        'score': int.parse(_scoreField.text),
+        'credit': listCreditScore[index].credit,
+        'iDSubject': listCreditScore[index].idSubject,
+        'nameSubject': selectedSubject,
+        'note': _noteField.text,
+        'score1': int.parse(_score1Field.text),
+        'score2': int.parse(_score2Field.text),
+        'score3': int.parse(_score3Field.text),
         'semester': selectedSemester,
       };
-      await documentReference.add(add).then((value) {
+      await documentReference.set(add).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text(StringManager.addActivitySuccessfully),
+            content: Text(StringManager.addSubjectSuccessfully),
           ),
         );
         setState(() {
           _idStudentField.text = '';
-          _scoreField.text = '';
+          _score1Field.text = '';
+          _score2Field.text = '';
+          _score3Field.text = '';
+          _noteField.text = '';
           selectedSemester = StringManager.selectSemester;
-          selectedActivity = StringManager.selectNameActivity;
+          selectedSubject = StringManager.selectNameSubject;
         });
       });
     });
