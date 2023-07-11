@@ -24,7 +24,9 @@ void main() async {
       measurementId: 'G-V9R6FL3702',
     ),
   );
-  await FirebaseMessaging.instance.getInitialMessage();
+  if (!kIsWeb) {
+    await FirebaseMessaging.instance.getInitialMessage();
+  }
   runApp(const MyApp());
 }
 

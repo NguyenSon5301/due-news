@@ -10,6 +10,7 @@ import '../../models/firebaseuser.dart';
 import '../../services/database_service.dart';
 import '../admin/add_extracurricular/add_extracurricular_page.dart';
 import '../admin/add_news/add_news_page.dart';
+import '../admin/add_subject_score/add_subject_score_page.dart';
 import '../home/home_page.dart';
 import '../news_collection/news_collection_page.dart';
 import '../page/page.dart';
@@ -33,6 +34,7 @@ class _MainTabBarState extends State<MainTabBar> {
     const NewsCollectionPage(),
     const AddExtracurricularPage(),
     const AddNewsPage(),
+    const AddSubjectScorePage(),
     const SamplePage(
       title: StringManager.titleInformationPage,
     ),
@@ -156,6 +158,24 @@ class _MainTabBarState extends State<MainTabBar> {
                                 });
                               },
                             ),
+                            const SizedBox(
+                              width: 150,
+                            ),
+                            BottomIconWidget(
+                              isSelect: pageIndex == 5,
+                              title: StringManager.addSubjectScoreTitle,
+                              iconName: pageIndex == 5
+                                  ? 'assets/icons/ic_subject_selected.png'
+                                  : 'assets/icons/ic_subject.png',
+                              iconColor: pageIndex == 5
+                                  ? Theme.of(context).primaryColor
+                                  : AppColors.gray,
+                              tap: () {
+                                setState(() {
+                                  pageIndex = 5;
+                                });
+                              },
+                            ),
                           ]
                         ],
                       );
@@ -166,18 +186,18 @@ class _MainTabBarState extends State<MainTabBar> {
                 )
               ],
               BottomIconWidget(
-                isSelect: pageIndex == 5,
+                isSelect: pageIndex == 6,
                 title:
                     user != null ? StringManager.logout : StringManager.login,
-                iconName: pageIndex == 5
+                iconName: pageIndex == 6
                     ? Assets.icons.icSelectedUser.path
                     : Assets.icons.icUnselectedUser.path,
-                iconColor: pageIndex == 5
+                iconColor: pageIndex == 6
                     ? Theme.of(context).primaryColor
                     : AppColors.gray,
                 tap: () {
                   setState(() {
-                    pageIndex = 5;
+                    pageIndex = 6;
                   });
                 },
               ),
@@ -188,3 +208,5 @@ class _MainTabBarState extends State<MainTabBar> {
     );
   }
 }
+
+//Edit something
